@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafy.post.model.dao.PostRepository">
+	<!--requestPostDto-->
+	<parameterMap id="newPost" type="Post">
+		<parameter property="authorId" />
+		<parameter property="title" />
+		<parameter property="content" />
+	</parameterMap>
+
+	<!-- PostResponse -->
+	<resultMap id="postResponse" type="Post">
+		<id property="postId" column="post_id" />
+		<result property="authorId" column="author_id"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+
+<!--	게시글 작성-->
+	<insert id="insert" parameterMap="newPost">
+		INSERT INTO post(author_id, title, content)
+		VALUES (#{authorId}, #{title}, #{content})
+	</insert>
+
+<!--	게시글 목록-->
+	<select id="selectAll" resultMap="postResponse">
+		SELECT post_id, author_id, title, content, hit
+		FROM post
+	</select>
+
+<!--	게시글 상세 조회-->
+	<select id="select" parameterType="int" resultMap="postResponse">
+		SELECT post_id, author_id, title, content, hit
+		FROM post
+		WHERE post_id = #{postId}
+	</select>
+
+<!--	게시글 수정-->
+	<update id="update" parameterType="Post">
+		UPDATE post
+		SET title = #{title}
+		, content = #{content}
+		, mod_date = current_timestamp
+		WHERE post_id = #{postId}
+	</update>
+
+<!--	게시글 삭제-->
+	<delete id="delete" parameterType="int">
+		DELETE FROM post
+		WHERE post_id = #{postId}
+	</delete>
+
+</mapper>

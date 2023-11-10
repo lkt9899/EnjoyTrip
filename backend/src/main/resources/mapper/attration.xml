@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.ssafy.attraction.model.dao.AttractionRepository">
+	<!--	게시글 목록-->
+	<select id="selectAll" resultType="attraction">
+		SELECT title,
+			   addr1,
+			   addr2,
+			   zipcode,
+			   tel,
+			   first_image,
+			   first_image2,
+			   readCount,
+			   sido_code,
+			   gugun_code,
+			   latitude,
+			   longitude
+		FROM attraction_info
+	</select>
+
+	<resultMap id="attractionResult" type="attraction">
+
+	</resultMap>
+
+
+
+
+</mapper>

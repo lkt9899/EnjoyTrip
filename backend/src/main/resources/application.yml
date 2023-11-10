@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: Enjoy Trip
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/enjoy_trip?serverTimezone=UTC
+    username: ssafy
+    password: ssafy
+    type: org.apache.commons.dbcp2.BasicDataSource
+
+  mvc:
+    pathmatch:
+      matching-strategy: ANT_PATH_MATCHER
+
+mybatis:
+  type-aliases-package: com.ssafy.*.model.dto
+  mapper-locations: mapper/*.xml
+
+logging:
+  level:
+    com.ssafy: trace
+    org.springframework.transaction: trace
+    org.springframework.jdbc: trace
+
+server:
+  servlet:
+    context-path: /trip
+  port: 80
