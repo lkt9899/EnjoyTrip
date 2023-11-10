@@ -1,9 +1,12 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import NavTopBar from "../components/common/NavTopBar.vue";
 </script>
 
 <template>
-  <main>
-    <TheWelcome />
-  </main>
+  <v-layout class="rounded rounded-md">
+    <NavTopBar />
+    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
+      Main Content
+    </v-main>
+  </v-layout>
 </template>
