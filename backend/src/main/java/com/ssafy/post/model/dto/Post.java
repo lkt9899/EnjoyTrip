@@ -9,11 +9,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString
 @Builder
 public class Post extends BaseTimeEntity {
     private int postId;
-    private int authorId;
+    private int memberId;
     private String title;
     private String content;
     private int hit;

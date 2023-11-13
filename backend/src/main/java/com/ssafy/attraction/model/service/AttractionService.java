@@ -1,7 +1,7 @@
 package com.ssafy.attraction.model.service;
 
 import com.ssafy.attraction.model.dao.AttractionRepository;
-import com.ssafy.attraction.model.dto.Attraction;
+import com.ssafy.attraction.model.dto.AttractionInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,7 +16,7 @@ public class AttractionService {
 
    private final AttractionRepository mapper;
 
-   public List<Attraction> selectAll() throws SQLException{
+   public List<AttractionInfo> selectAll() throws SQLException{
       return mapper.selectAll();
    }
 

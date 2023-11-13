@@ -1,7 +1,6 @@
 package com.ssafy.post.controller;
 
 import com.ssafy.post.model.dto.Post;
-import com.ssafy.post.model.dto.data.PostRequest;
 import com.ssafy.post.model.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,20 +22,19 @@ public class PostController {
     private final PostService ps;
 
     @PostMapping("/write")
-    public ResponseEntity<String> write(@RequestBody PostRequest postRequest) throws SQLException {
-        ps.insert(postRequest.toPost());
+    public ResponseEntity<String> write(@RequestBody Post post) throws SQLException {
+        ps.insert(post);
         return ResponseEntity.status(HttpStatus.CREATED).body("created");
     }
 
     @GetMapping("/list")
     public ResponseEntity<List<Post>> list() throws SQLException {
         List<Post> list = ps.selectAll();
-        System.out.println(list.toString());
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
     @GetMapping("/view/{postId}")
-    public ResponseEntity<Post> view(@PathVariable("postId") int postId) throws SQLException {
+    public ResponseEntity<Post> view(@PathVariable int postId) throws SQLException {
         Post post = ps.select(postId);
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }

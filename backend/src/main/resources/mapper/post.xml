@@ -6,35 +6,26 @@
 <mapper namespace="com.ssafy.post.model.dao.PostRepository">
 	<!--requestPostDto-->
 	<parameterMap id="newPost" type="Post">
-		<parameter property="authorId" />
+		<parameter property="memberId" />
 		<parameter property="title" />
 		<parameter property="content" />
 	</parameterMap>
 
-	<!-- PostResponse -->
-	<resultMap id="postResponse" type="Post">
-		<id property="postId" column="post_id" />
-		<result property="authorId" column="author_id"/>
-		<result property="title" column="title"/>
-		<result property="content" column="content"/>
-		<result property="hit" column="hit"/>
-	</resultMap>
-
 <!--	게시글 작성-->
 	<insert id="insert" parameterMap="newPost">
 		INSERT INTO post(author_id, title, content)
-		VALUES (#{authorId}, #{title}, #{content})
+		VALUES (#{memberId}, #{title}, #{content})
 	</insert>
 
 <!--	게시글 목록-->
-	<select id="selectAll" resultMap="postResponse">
-		SELECT post_id, author_id, title, content, hit
+	<select id="selectAll" resultType="Post">
+		SELECT *
 		FROM post
 	</select>
 
 <!--	게시글 상세 조회-->
-	<select id="select" parameterType="int" resultMap="postResponse">
-		SELECT post_id, author_id, title, content, hit
+	<select id="select" parameterType="int" resultType="Post">
+		SELECT *
 		FROM post
 		WHERE post_id = #{postId}
 	</select>
@@ -44,7 +35,7 @@
 		UPDATE post
 		SET title = #{title}
 		, content = #{content}
-		, mod_date = current_timestamp
+		, mod_date = #{modDate}
 		WHERE post_id = #{postId}
 	</update>
 

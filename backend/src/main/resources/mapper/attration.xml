@@ -5,8 +5,9 @@
 
 <mapper namespace="com.ssafy.attraction.model.dao.AttractionRepository">
 	<!--	게시글 목록-->
-	<select id="selectAll" resultType="attraction">
-		SELECT title,
+	<select id="selectAll" resultType="attractionInfo">
+		SELECT content_id,
+		       title,
 			   addr1,
 			   addr2,
 			   zipcode,
@@ -19,11 +20,9 @@
 			   latitude,
 			   longitude
 		FROM attraction_info
+		order by content_id limit 7;
 	</select>
 
-	<resultMap id="attractionResult" type="attraction">
-
-	</resultMap>
 
 
 
