@@ -1,12 +1,15 @@
 <script setup>
-import NavTopBar from "../components/common/NavTopBar.vue";
+import NavBar from "../components/layout/NavBar.vue";
+import MainView from "../components/Home/MainView.vue";
+import MyFooter from "../components/layout/MyFooter.vue";
 </script>
 
 <template>
-  <v-layout class="rounded rounded-md">
-    <NavTopBar />
-    <v-main class="d-flex align-center justify-center" style="min-height: 300px;">
-      Main Content
-    </v-main>
-  </v-layout>
+    <div class="container">
+        <NavBar />
+        <MainView />
+        <MyFooter />
+    </div>
 </template>
+
+<style scoped></style>
