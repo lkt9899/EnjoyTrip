@@ -10,7 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @Builder
-public class Hotplace {
+public class HotPlace {
+    private int hotPlaceId;
     private int memberId;
     private int contentId;
     private int contentTypeId;
@@ -20,4 +21,5 @@ public class Hotplace {
     private LocalDate visitedDate;
     private String uploadFileName;
     private String storeFileName;
+    private LocalDateTime regDate;
 }
