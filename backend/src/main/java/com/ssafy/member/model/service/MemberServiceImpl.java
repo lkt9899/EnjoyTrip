@@ -38,7 +38,7 @@ public class MemberServiceImpl implements MemberService{
 
     @Transactional
     @Override
-    public void delete(String id) throws SQLException {
-        memberRepository.delete(id);
+    public void delete(int memberId) throws SQLException {
+        memberRepository.delete(memberId);
     }
 }

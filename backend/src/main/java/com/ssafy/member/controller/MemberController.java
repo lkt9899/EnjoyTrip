@@ -29,9 +29,9 @@ public class MemberController {
     public ResponseEntity<String> register(@RequestBody Member member){
         try {
             memberServiceImpl.register(member);
-            return new ResponseEntity<>("success", HttpStatus.CREATED);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         } catch (SQLException e) {
-            return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
@@ -51,9 +51,8 @@ public class MemberController {
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session){
         if(session.getAttribute("userinfo") != null ) session.invalidate(); //session 소멸
-        return new ResponseEntity<>("success", HttpStatus.OK);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
-
 
     @PostMapping("/update")
     public ResponseEntity<?> update(@RequestParam Member member){
@@ -66,9 +65,9 @@ public class MemberController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> delete(@RequestParam String id) {
+    public ResponseEntity<?> delete(@RequestParam int memberId) {
         try {
-            memberServiceImpl.delete(id);
+            memberServiceImpl.delete(memberId);
             return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);

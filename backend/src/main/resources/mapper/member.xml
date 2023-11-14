@@ -41,9 +41,9 @@
 		where id = #{id}
 	</update>
 
-	<delete id="delete" parameterType="String">
+	<delete id="delete" parameterType="int">
 		delete FROM member
-		WHERE id = #{id}
+		WHERE member_id = #{memberId}
 	</delete>
 	
 

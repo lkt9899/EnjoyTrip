@@ -11,6 +11,7 @@ import lombok.Setter;
 @Setter
 @Builder
 public class Attraction {
+    private int contentId;
     private int contentTypeId;
     private String title;
     private String addr1;

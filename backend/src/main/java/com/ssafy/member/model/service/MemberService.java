@@ -12,7 +12,7 @@ public interface MemberService {
    void register(Member member) throws SQLException;
    Member login(String id, String password) throws SQLException;
    void update(Member member) throws SQLException;
-   void delete(String id) throws SQLException;
+   void delete(int memberId) throws SQLException;
 
 
 }
