@@ -24,6 +24,7 @@ public class PostService {
         return mapper.selectAll();
     }
 
+    @Transactional
     public Post select(int postId) throws SQLException{
         mapper.updateHit(postId);
         return mapper.select(postId);
