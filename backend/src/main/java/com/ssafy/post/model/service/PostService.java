@@ -25,6 +25,7 @@ public class PostService {
     }
 
     public Post select(int postId) throws SQLException{
+        mapper.updateHit(postId);
         return mapper.select(postId);
     }
 

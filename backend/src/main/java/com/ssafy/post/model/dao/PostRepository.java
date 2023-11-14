@@ -15,6 +15,7 @@ public interface PostRepository {
     List<Post> selectAll() throws SQLException;
     // 게시글 상세 조회
     Post select(int postId) throws SQLException;
+    void updateHit(int postId) throws  SQLException;
     //게시글 수정
     void update(Post post) throws SQLException;
     // 게시글 삭제

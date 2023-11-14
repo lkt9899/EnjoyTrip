@@ -52,6 +52,4 @@ public class PostController {
         ps.delete(postId);
         return ResponseEntity.status(HttpStatus.OK).body("success");
     }
-
-
 }
