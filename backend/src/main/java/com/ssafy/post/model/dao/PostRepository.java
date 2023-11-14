@@ -1,6 +1,7 @@
 package com.ssafy.post.model.dao;
 
 import com.ssafy.post.model.dto.Post;
+import com.ssafy.util.dto.PagingInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.jdbc.SQL;
 
@@ -13,7 +14,7 @@ public interface PostRepository {
     // 게시글 작성
     void insert(Post post) throws SQLException;
     //게시글 목록
-    List<Post> selectAll(Map<String, Object> map) throws SQLException;
+    List<Post> selectAll(PagingInfo pagingInfo) throws SQLException;
     // 게시글 상세 조회
     Post select(int postId) throws SQLException;
     void updateHit(int postId) throws  SQLException;

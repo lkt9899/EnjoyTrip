@@ -20,7 +20,7 @@
 		<result property="hit" column="hit"/>
 	</resultMap>
 
-	<!-- 뭔지 모르겠음 -->
+	<!-- 조건 검색 -->
 	<sql id="search">
 		<if test="word != null and word != ''">
 			<if test="key == 'subject'">
@@ -38,11 +38,15 @@
 		VALUES (#{authorId}, #{title}, #{content})
 	</insert>
 
-<!--	게시글 목록-->
-	<select id="selectAll" resultMap="postResponse">
+	<!--게시글 목록-->
+	<select id="selectAll" parameterType="pagingInfo" resultMap="postResponse">
 		SELECT post_id, author_id, title, content, hit
 		FROM post
+		WHERE post_id > #{offset}
+		ORDER BY post_id
+			LIMIT #{count}
 	</select>
+
 
 	<!-- 게시글 갯수 조회 -->
 	<select id="getTotalArticleCount" parameterType="map" resultType="int">
@@ -59,8 +63,7 @@
 		FROM post
 		WHERE post_id = #{postId}
 	</select>
-
-<!--	게시글 수정-->
+	<!-- 게시글 수정 -->
 	<update id="update" parameterType="Post">
 		UPDATE post
 		SET title = #{title}
@@ -69,6 +72,7 @@
 		WHERE post_id = #{postId}
 	</update>
 
+	<!-- 조회수 업데이트 -->
 	<update id="updateHit" parameterType="int">
 		UPDATE post
 		SET hit = hit + 1

@@ -14,7 +14,7 @@ spring:
       matching-strategy: ANT_PATH_MATCHER
 
 mybatis:
-  type-aliases-package: com.ssafy.*.model.dto
+  type-aliases-package: com.ssafy.*.dto
   mapper-locations: mapper/*.xml
 
 logging:

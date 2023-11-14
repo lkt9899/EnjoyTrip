@@ -22,32 +22,32 @@
 	</resultMap>
 
 	<!--	게시글 목록-->
-	<select id="select" parameterType="SearchCondition" resultMap="attractionResponse">
-		SELECT
-		    content_type_id,
-		    title,
-		   	addr1,
-		   	addr2,
-		   	zipcode,
-		   	tel,
-		   	first_image,
-		  	first_image2,
-		   	readCount,
-		   	sido_code,
-		   	gugun_code,
-		   	latitude,
-		   	longitude,
-		   	mlevel
-		FROM attraction_info
-		WHERE 1=1
-		    <if test="sidoCode != null">
-				AND sido_code = #{sidoCode}
-			</if>
-			<if test="gugunCode != null">
-				AND gugun_code = #{gugunCode}
-			</if>
-			<if test="contentTypeId != null">
-				AND content_type_id = #{contentTypeId}
-			</if>
-	</select>
+<!--	<select id="select" parameterType="SearchCondition" resultMap="attractionResponse">-->
+<!--		SELECT-->
+<!--		    content_type_id,-->
+<!--		    title,-->
+<!--		   	addr1,-->
+<!--		   	addr2,-->
+<!--		   	zipcode,-->
+<!--		   	tel,-->
+<!--		   	first_image,-->
+<!--		  	first_image2,-->
+<!--		   	readCount,-->
+<!--		   	sido_code,-->
+<!--		   	gugun_code,-->
+<!--		   	latitude,-->
+<!--		   	longitude,-->
+<!--		   	mlevel-->
+<!--		FROM attraction_info-->
+<!--		WHERE 1=1-->
+<!--		    <if test="sidoCode != null">-->
+<!--				AND sido_code = #{sidoCode}-->
+<!--			</if>-->
+<!--			<if test="gugunCode != null">-->
+<!--				AND gugun_code = #{gugunCode}-->
+<!--			</if>-->
+<!--			<if test="contentTypeId != null">-->
+<!--				AND content_type_id = #{contentTypeId}-->
+<!--			</if>-->
+<!--	</select>-->
 </mapper>
