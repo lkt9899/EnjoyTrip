@@ -3,6 +3,7 @@ package com.ssafy.attraction.model.service;
 import com.ssafy.attraction.model.dao.AttractionRepository;
 import com.ssafy.attraction.model.dto.Attraction;
 
+import com.ssafy.attraction.model.dto.SearchCondition;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
