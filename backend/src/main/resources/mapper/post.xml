@@ -20,6 +20,18 @@
 		<result property="hit" column="hit"/>
 	</resultMap>
 
+	<!-- 뭔지 모르겠음 -->
+	<sql id="search">
+		<if test="word != null and word != ''">
+			<if test="key == 'subject'">
+				and subject like concat('%', #{word}, '%')
+			</if>
+			<if test="key != 'subject'">
+				and ${key} = #{word}
+			</if>
+		</if>
+	</sql>
+
 <!--	게시글 작성-->
 	<insert id="insert" parameterMap="newPost">
 		INSERT INTO post(author_id, title, content)
@@ -30,6 +42,15 @@
 	<select id="selectAll" resultMap="postResponse">
 		SELECT post_id, author_id, title, content, hit
 		FROM post
+	</select>
+
+	<!-- 게시글 갯수 조회 -->
+	<select id="getTotalArticleCount" parameterType="map" resultType="int">
+		select count(post_id)
+		from post
+		<where>
+			<include refid="search"></include>
+		</where>
 	</select>
 
 <!--	게시글 상세 조회-->
