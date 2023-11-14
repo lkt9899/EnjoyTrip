@@ -48,6 +48,12 @@
 		WHERE post_id = #{postId}
 	</update>
 
+	<update id="updateHit" parameterType="int">
+		UPDATE post
+		SET hit = hit + 1
+		WHERE post_id = #{postId}
+	</update>
+
 <!--	게시글 삭제-->
 	<delete id="delete" parameterType="int">
 		DELETE FROM post
