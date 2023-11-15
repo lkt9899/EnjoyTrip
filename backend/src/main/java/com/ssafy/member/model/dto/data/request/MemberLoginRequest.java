@@ -1,4 +1,4 @@
-package com.ssafy.member.model.dto;
+package com.ssafy.member.model.dto.data.request;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

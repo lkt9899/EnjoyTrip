@@ -1,8 +1,10 @@
 package com.ssafy.member.model.service;
+
 import com.ssafy.member.exception.MemberErrorCode;
 import com.ssafy.member.exception.MemberException;
 import com.ssafy.member.model.dao.MemberRepository;
 import com.ssafy.member.model.dto.Member;
+import com.ssafy.member.model.dto.data.response.MemberLoginResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,13 +26,13 @@ public class MemberService {
         mapper.register(member);
     }
     
-    public Member login(String id, String password) {
+    public MemberLoginResponse login(String id, String password) {
         // 아이디 존재 여부 확인
         if(mapper.existsById(id) == 0)
             throw new MemberException(MemberErrorCode.LOGIN_FAILED);
 
         // 비밀 번호 확인
-        Member member = mapper.findById(id);
+        MemberLoginResponse member = mapper.findById(id);
         if(!member.getPassword().equals(password))
             throw new MemberException(MemberErrorCode.LOGIN_FAILED);
 

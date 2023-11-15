@@ -30,8 +30,12 @@
 		values (#{id}, #{password}, #{name}, #{phoneNumber}, #{gender}, #{age})
 	</insert>
 
-	<select id="findById" parameterType="String" resultType="Member">
-		select *
+	<select id="findById" parameterType="String" resultType="MemberLoginResponse">
+		select
+		    member_id memberId,
+		    id,
+		    password,
+		    name
 		from member
 		where id = #{id}
 	</select>

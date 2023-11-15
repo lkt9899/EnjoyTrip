@@ -8,4 +8,5 @@ import lombok.NoArgsConstructor;
 @Getter
 public class MemberLoginResponse extends MemberLogin {
     private int memberId;
+    private String name;
 }

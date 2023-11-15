@@ -1,7 +1,8 @@
 package com.ssafy.member.controller;
 
 import com.ssafy.member.model.dto.Member;
-import com.ssafy.member.model.dto.MemberLoginRequest;
+import com.ssafy.member.model.dto.data.request.MemberLoginRequest;
+import com.ssafy.member.model.dto.data.response.MemberLoginResponse;
 import com.ssafy.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,13 +26,13 @@ public class MemberController {
     }
 
     @PostMapping ("/login")
-    public ResponseEntity<?> login(@RequestBody MemberLoginRequest req){
-        Member member = memberService.login(req.getId(), req.getPassword());
-        return ResponseEntity.status(HttpStatus.OK).body(member);
+    public ResponseEntity<MemberLoginResponse> login(@RequestBody MemberLoginRequest req){
+        MemberLoginResponse res = memberService.login(req.getId(), req.getPassword());
+        return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 
     @GetMapping("/logout")
-    public ResponseEntity<?> logout(HttpSession session){
+    public ResponseEntity<Void> logout(HttpSession session){
         if(session.getAttribute("userinfo") != null ) session.invalidate(); //session 소멸
         return ResponseEntity.status(HttpStatus.OK).build();
     }
