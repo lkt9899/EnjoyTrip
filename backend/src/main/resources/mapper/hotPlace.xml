@@ -4,14 +4,12 @@
 
 
 <mapper namespace="com.ssafy.hotplace.model.dao.HotPlaceRepository">
-
-
-	<insert id="insert" parameterType="HotPlace">
-		INSERT INTO hot_place(member_id, content_id, content_type_id, title, `desc`, visited_date, upload_file_name, store_file_name)
-		VALUES (#{memberId}, #{contentId}, #{contentTypeId}, #{title}, #{desc}, #{visitedDate}, #{uploadFileName}, #{storeFileName})
+	<insert id="insert" parameterType="HotPlaceRequest">
+		INSERT INTO hot_place(member_id, content_id, title, `desc`, visited_date, upload_file_name, store_file_name)
+		VALUES (#{memberId}, #{contentId}, #{title}, #{desc}, #{visitedDate}, #{uploadFileName}, #{storeFileName})
 	</insert>
 
-	<update id="update" parameterType="HotPlace">
+	<update id="update" parameterType="HotPlaceRequest">
 		UPDATE hot_place
 		SET
 		    title = #{title},
@@ -20,6 +18,30 @@
 			upload_file_name = #{uploadFileName},
 			store_file_name = #{storeFileName},
 			mod_date = current_timestamp
-		WHERE hot_place_id = #{hotplaceId}
+		WHERE hot_place_id = #{hotPlaceId}
+	</update>
+
+	<select id="select" parameterType="int" resultType="HotPlaceResponse">
+		SELECT
+		    m.id,
+		    h.hot_place_id hotPlaceId,
+			h.content_id contentId,
+			h.title title,
+			h.`desc`,
+			h.hit,
+			h.visited_date visitedDate,
+			h.upload_file_name uploadFileName,
+			h.store_file_name storeFileName,
+			h.reg_date regDate
+		FROM hot_place h
+		join member m
+		on h.member_id = m.member_id
+		WHERE hot_place_id = #{hotPlaceId}
+	</select>
+
+	<update id="updateHit" parameterType="int">
+		UPDATE hot_place
+		SET hit = hit + 1
+		WHERE hot_place_id = #{hotPlaceId}
 	</update>
 </mapper>
