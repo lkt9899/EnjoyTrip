@@ -1,6 +1,7 @@
 package com.ssafy.attraction.controller;
 
 import com.ssafy.attraction.model.dto.Attraction;
+
 import com.ssafy.attraction.model.dto.SearchCondition;
 import com.ssafy.attraction.model.service.AttractionService;
 import lombok.RequiredArgsConstructor;
