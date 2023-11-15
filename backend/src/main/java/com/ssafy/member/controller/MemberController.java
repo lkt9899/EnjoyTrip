@@ -2,8 +2,12 @@ package com.ssafy.member.controller;
 
 import com.ssafy.member.model.dto.Member;
 import com.ssafy.member.model.dto.MemberLoginRequest;
+import com.ssafy.member.model.dto.request.MemberDeleteRequest;
+import com.ssafy.member.model.dto.request.MemberUpdateRequest;
+import com.ssafy.member.model.dto.response.MemberInfoResponse;
 import com.ssafy.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,18 +22,20 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberService memberServiceImpl;
+    private final MemberService memberService;
 
     @PostMapping ("/register")
-    public ResponseEntity<String> register(@RequestBody Member member){
+    public ResponseEntity<?> register(@RequestBody Member member){
         try {
-            memberServiceImpl.register(member);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            MemberInfoResponse loginMember = memberService.register(member);
+            log.info("=====loginMember======= "+loginMember);
+            return ResponseEntity.status(HttpStatus.CREATED).body(loginMember);
         } catch (SQLException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -38,9 +44,9 @@ public class MemberController {
     @PostMapping ("/login")
     public ResponseEntity<?> login(@RequestBody MemberLoginRequest req){
         try {
-            Member member = memberServiceImpl.login(req.getId(), req.getPassword());
-            if(member != null)
-                return ResponseEntity.status(HttpStatus.OK).body(member);
+            MemberInfoResponse loginMember = memberService.login(req.getId(), req.getPassword());
+            if(loginMember != null)
+                return ResponseEntity.status(HttpStatus.OK).body(loginMember);
             else
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         } catch (SQLException e) {
@@ -50,14 +56,14 @@ public class MemberController {
 
     @GetMapping("/logout")
     public ResponseEntity<?> logout(HttpSession session){
-        if(session.getAttribute("userinfo") != null ) session.invalidate(); //session 소멸
+        if(session.getAttribute("loginInfo") != null ) session.invalidate(); //session 소멸
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestParam Member member){
+    public ResponseEntity<?> update(@RequestBody MemberUpdateRequest member){
         try {
-            memberServiceImpl.update(member);
+            memberService.update(member);
             return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
@@ -65,18 +71,13 @@ public class MemberController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> delete(@RequestParam int memberId) {
+    public ResponseEntity<?> delete(@RequestBody MemberDeleteRequest memberDeleteRequest) {
         try {
-            memberServiceImpl.delete(memberId);
+            memberService.delete(memberDeleteRequest);
             return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-
-
-
-
 
 }
