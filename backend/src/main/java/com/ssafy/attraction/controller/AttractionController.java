@@ -30,7 +30,7 @@ public class AttractionController {
           List<Attraction> list = attractionService.select(condition);
           return ResponseEntity.status(HttpStatus.OK).body(list);
        } catch (SQLException e) {
-          return new ResponseEntity(HttpStatus.INTERNAL_SERVER_ERROR);
+          return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
        }
 
     }
