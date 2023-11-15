@@ -30,6 +30,11 @@
 		where id = #{id}
 	</select>
 
+	<select id="selectCountOfMember" resultType="int">
+		SELECT COUNT(*) as count
+		FROM member
+	</select>
+
 	<update id="update" parameterType="Member">
 		update member set
 						  password = #{password},

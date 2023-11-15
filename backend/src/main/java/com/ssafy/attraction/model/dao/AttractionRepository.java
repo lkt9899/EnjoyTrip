@@ -11,5 +11,7 @@ import java.util.List;
 public interface AttractionRepository {
 
    List<Attraction> select(SearchCondition condition) throws SQLException;
+   int selectCountOfAttraction() throws SQLException;
+
 
 }

@@ -15,6 +15,7 @@ public interface PostRepository {
     void insert(Post post) throws SQLException;
     //게시글 목록
     List<Post> selectAll(PagingInfo pagingInfo) throws SQLException;
+    int selectCountOfPost() throws SQLException;
     // 게시글 상세 조회
     Post select(int postId) throws SQLException;
     void updateHit(int postId) throws  SQLException;

@@ -21,5 +21,9 @@ public class AttractionService {
    public List<Attraction> select(SearchCondition condition) throws SQLException{
       return mapper.select(condition);
    }
+   public int selectCountOfAttraction() throws SQLException {
+      return mapper.selectCountOfAttraction();
+   }
+
 
 }

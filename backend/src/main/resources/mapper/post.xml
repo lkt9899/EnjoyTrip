@@ -47,14 +47,10 @@
 			LIMIT #{count}
 	</select>
 
-
 	<!-- 게시글 갯수 조회 -->
-	<select id="getTotalArticleCount" parameterType="map" resultType="int">
-		select count(post_id)
-		from post
-		<where>
-			<include refid="search"></include>
-		</where>
+	<select id="selectCountOfPost" resultType="int">
+		SELECT COUNT(*) as count
+		FROM post
 	</select>
 
 <!--	게시글 상세 조회-->
