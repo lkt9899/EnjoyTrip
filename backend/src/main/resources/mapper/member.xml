@@ -24,7 +24,13 @@
 		values (#{id}, #{password}, #{name}, #{phoneNumber}, #{gender}, #{age})
 	</insert>
 
-	<select id="select" parameterType="String" resultType="Member">
+	<select id="selectMemberByMemberId" parameterType="int" resultType="Member">
+		select *
+		from member
+		where member_id = #{member_id}
+	</select>
+
+	<select id="selectMemberById" parameterType="String" resultType="member">
 		select *
 		from member
 		where id = #{id}
