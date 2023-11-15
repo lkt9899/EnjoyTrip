@@ -5,8 +5,9 @@
 
 <mapper namespace="com.ssafy.attraction.model.dao.AttractionRepository">
 	<resultMap id="attractionResponse" type="Attraction">
+		<result column="content_id" property="contentId" />
 		<result column="content_type_id" property="contentTypeId"/>
-		<result column="title" property="title"/>
+		<result column="title" property="title" />
 		<result column="addr1" property="addr1"/>
 		<result column="addr2" property="addr2"/>
 		<result column="zipcode" property="zipcode"/>
@@ -24,6 +25,7 @@
 	<!--	게시글 목록-->
 	<select id="select" parameterType="SearchCondition" resultMap="attractionResponse">
 		SELECT
+		    content_id,
 		    content_type_id,
 		    title,
 		   	addr1,
