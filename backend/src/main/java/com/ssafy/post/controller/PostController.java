@@ -3,6 +3,7 @@ package com.ssafy.post.controller;
 import com.ssafy.post.model.dto.Post;
 import com.ssafy.post.model.dto.data.PostRequest;
 import com.ssafy.post.model.service.PostService;
+import com.ssafy.util.dto.PagingInfo;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,12 +30,9 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).body("created");
     }
 
-    @GetMapping("/list")
-    public ResponseEntity<List<Post>> list(@RequestParam Map<String, Object> map) throws SQLException {
-        log.info("post - list count :{} ", map.get("count"));
-        log.info("post - list offset :{} ", map.get("offset"));
-
-        List<Post> list = postService.selectAll(map);
+    @PostMapping("/list")
+    public ResponseEntity<List<Post>> list(@RequestBody PagingInfo pagingInfo) throws SQLException {
+        List<Post> list = postService.selectAll(pagingInfo);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 

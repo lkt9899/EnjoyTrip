@@ -2,6 +2,7 @@ package com.ssafy.post.model.service;
 
 import com.ssafy.post.model.dao.PostRepository;
 import com.ssafy.post.model.dto.Post;
+import com.ssafy.util.dto.PagingInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,9 +23,8 @@ public class PostService {
         mapper.insert(post);
     }
 
-    public List<Post> selectAll(Map<String, Object> map) throws SQLException{
-        Map<String, Object> pageNavigationInfo = new HashMap<String, Object>();
-        return mapper.selectAll(map);
+    public List<Post> selectAll(PagingInfo pagingInfo) throws SQLException{
+        return mapper.selectAll(pagingInfo);
     }
 
     @Transactional
