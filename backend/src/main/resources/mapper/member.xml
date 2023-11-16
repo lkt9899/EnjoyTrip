@@ -18,7 +18,7 @@
 		values (#{id}, #{password}, #{name}, #{phoneNumber}, #{gender}, #{age})
 	</insert>
 
-	<select id="selectMemberByMemberId" parameterType="int" resultType="Member">
+	<select id="selectMemberByMemberId" parameterType="int" resultType="memberInfoResponse">
 		select member_id as memberId, id as id, password as password, name as name, phone_number as phoneNumber, gender as gender, age as age, reg_date as regDate, mod_date as modDate
 		from member
 		where member_id = #{member_id}
