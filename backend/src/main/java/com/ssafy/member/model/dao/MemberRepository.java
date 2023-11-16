@@ -16,6 +16,6 @@ public interface MemberRepository {
    MemberInfoResponse selectMemberByMemberId(int memberId) throws SQLException;
    MemberInfoResponse selectMemberById(String id) throws SQLException;
    void update(MemberUpdateRequest member) throws SQLException;
-   void delete(MemberDeleteRequest memberDeleteRequest) throws SQLException;
+   void delete(int memberId) throws SQLException;
 
 }

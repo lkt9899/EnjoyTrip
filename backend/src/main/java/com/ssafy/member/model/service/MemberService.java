@@ -40,7 +40,7 @@ public class MemberService {
     }
 
     @Transactional
-    public void delete(MemberDeleteRequest memberDeleteRequest) throws SQLException {
-        memberRepository.delete(memberDeleteRequest);
+    public void delete(int memberId) throws SQLException {
+        memberRepository.delete(memberId);
     }
 }

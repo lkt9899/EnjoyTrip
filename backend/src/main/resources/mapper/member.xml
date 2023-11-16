@@ -41,7 +41,7 @@
 		where id = #{id}
 	</update>
 
-	<delete id="delete" parameterType="memberDeleteRequest">
+	<delete id="delete" parameterType="int">
 		delete FROM member
 		WHERE member_id = #{memberId}
 	</delete>

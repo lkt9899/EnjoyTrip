@@ -71,9 +71,9 @@ public class MemberController {
     }
 
     @PostMapping("/delete")
-    public ResponseEntity<?> delete(@RequestBody MemberDeleteRequest memberDeleteRequest) {
+    public ResponseEntity<?> delete(@RequestBody int memberId) {
         try {
-            memberService.delete(memberDeleteRequest);
+            memberService.delete(memberId);
             return new ResponseEntity<>("success", HttpStatus.OK);
         } catch (SQLException e) {
             return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
