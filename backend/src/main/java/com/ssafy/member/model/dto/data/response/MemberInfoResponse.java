@@ -1,5 +1,6 @@
-package com.ssafy.member.model.dto.response;
+package com.ssafy.member.model.dto.data.response;
 
+import com.ssafy.member.model.dto.data.common.MemberLogin;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,10 +12,8 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class MemberInfoResponse {
+public class MemberInfoResponse extends MemberLogin {
   private String memberId;
-  private String id;
-  private String password;
   private String name;
   private String phoneNumber;
   private String gender;

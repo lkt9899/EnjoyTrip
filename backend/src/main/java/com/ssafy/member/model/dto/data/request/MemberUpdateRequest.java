@@ -1,4 +1,4 @@
-package com.ssafy.member.model.dto.request;
+package com.ssafy.member.model.dto.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,6 @@ import lombok.ToString;
 @Builder
 @ToString
 public class MemberUpdateRequest {
-
    private String id;
    private String password;
    private String name;
