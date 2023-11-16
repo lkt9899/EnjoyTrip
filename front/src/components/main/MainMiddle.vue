@@ -7,6 +7,8 @@ import SearchBar from './SearchBar.vue';
 
 
 const items = ref([]);
+const scrollComponent = ref(null)
+const isInitCall = ref(true)
 
 const requestParams = {
   searchCondition: {
@@ -38,32 +40,45 @@ const getAttractionList = () => {
    });
 };
 
-const scrollComponent = ref(null)
 
 const loadMoreAttractions = () => {
-  getAttractionList()
+  getAttractionList();
 }
 
+const debounce = (func, delay) => {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};
+
+const handleScroll = debounce(() => {
+
+  isInitCall.value = false;
+
+  let element = scrollComponent.value;
+  const rect = element.getBoundingClientRect();
+  const isAtBottom = rect.bottom <= window.innerHeight + 5;
+
+  if (isAtBottom) {
+    console.log("Scrolled to the bottom!");
+    loadMoreAttractions();
+  }
+}, 200);
+
 onMounted(() => {
-  getAttractionList(); // params 정보로 attrationList를 가져온다.
+  console.log("isInitCall"+isInitCall.value);
+  if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
+  
   window.addEventListener("scroll", handleScroll)
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll)
 })
-
-const handleScroll = (e) => {
-
-  let element = scrollComponent.value;
-  const rect = element.getBoundingClientRect();
-  const isAtBottom = rect.bottom <= window.innerHeight + 50;
-
-  if (isAtBottom) {
-    console.log("Scrolled to the bottom!");
-    loadMoreAttractions()
-  }
-}
 
 
 </script>

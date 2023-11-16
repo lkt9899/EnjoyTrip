@@ -8,7 +8,7 @@ defineProps({
 
 
     <div class="card">
-        <img src="@/assets/images.jpg" alt="image description" />
+        <img :src="item.firstImage" alt="image description" />
         <div class="card-content">
         <h4>{{item.title}}</h4> 
         <p>Card Description</p>
