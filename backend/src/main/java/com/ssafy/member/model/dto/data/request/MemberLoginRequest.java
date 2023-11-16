@@ -1,13 +1,6 @@
 package com.ssafy.member.model.dto.data.request;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ssafy.member.model.dto.data.common.MemberLogin;
 
-@NoArgsConstructor
-@Getter
-@Setter
-public class MemberLoginRequest {
-    private String id;
-    private String password;
+public class MemberLoginRequest extends MemberLogin {
 }

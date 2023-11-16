@@ -7,8 +7,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface MemberRepository {
-
-
    void register(Member member);
    int existsById(String id);
    MemberLoginResponse findById(String id);
