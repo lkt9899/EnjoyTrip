@@ -14,7 +14,6 @@ import lombok.ToString;
 @Builder
 @ToString
 public class MemberUpdateRequest {
-
    private String id;
    private String password;
    private String name;

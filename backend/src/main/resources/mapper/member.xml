@@ -4,11 +4,6 @@
 
 <mapper namespace="com.ssafy.member.model.dao.MemberRepository">
 
-	<resultMap id="loginInfo" type="Member">
-		<id property="id" column="id"/>
-		<result property="password" column="password"/>
-	</resultMap>
-
 	<resultMap id="memberInfo" type="Member">
 		<id property="id" column="id"/>
 		<result property="password" column="password"/>
@@ -30,6 +25,21 @@
 		values (#{id}, #{password}, #{name}, #{phoneNumber}, #{gender}, #{age})
 	</insert>
 
+    <select id="findByMemberId" parameterType="int" resultType="memberInfoResponse">
+        select
+            member_id memberId,
+            id,
+            password,
+            name,
+            phone_number phoneNumber,
+            gender,
+            age,
+            reg_date regDate,
+            mod_date modDate
+        from member
+        where member_id = #{memberId}
+    </select>
+
 	<select id="findById" parameterType="String" resultType="MemberLoginResponse">
 		select
 		    member_id memberId,
@@ -40,21 +50,21 @@
 		where id = #{id}
 	</select>
 
-	<update id="update" parameterType="Member">
-		update member set
-						  password = #{password},
-						  name = #{name},
-						  phone_number = #{phoneNumber},
-						  gender = #{gender},
-						  age = #{age},
-						  mod_date = now()
+	<update id="update" parameterType="memberUpdateRequest">
+		UPDATE member
+		SET
+		    password = #{password},
+			name = #{name},
+			phone_number = #{phoneNumber},
+			gender = #{gender},
+			age = #{age},
+			mod_date = now()
 		where id = #{id}
 	</update>
 
 	<delete id="delete" parameterType="int">
-		delete FROM member
+		DELETE FROM member
 		WHERE member_id = #{memberId}
 	</delete>
-	
 
 </mapper>
