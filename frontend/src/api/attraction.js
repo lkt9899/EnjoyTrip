@@ -1,11 +1,35 @@
-import { apiInstance } from './index.js';
-
-const api = apiInstance();
+import { localAxios } from '@/util/http-commons';
+import axios from 'axios';
+import { ref} from "vue";
+const local = localAxios();
 
 const url = '/attraction';
 
-function getAttractionList(success, fail) {
-    api.get(`${url}/list`).then(success).catch(fail);
+function getList(params, success, fail) {
+    console.log("axios 호출");
+    // local.get(`${url}/list`).then(success).catch(fail);
+    local.post(`${url}/list`, params)
+        .then(success)
+        .catch(fail);
 }
 
-export { getAttractionList };
+// function detailArticle(articleno, success, fail) {
+//     local.get(`${url}/${articleno}`).then(success).catch(fail);
+// }
+
+
+// function getModifyArticle(articleno, success, fail) {
+//     local.get(`${url}/modify/${articleno}`).then(success).catch(fail);
+// }
+
+// function modifyArticle(article, success, fail) {
+//     local.put(`${url}`, JSON.stringify(article)).then(success).catch(fail);
+// }
+
+// function deleteArticle(articleno, success, fail) {
+//     local.delete(`${url}/${articleno}`).then(success).catch(fail);
+// }
+
+export {
+    getList
+};
