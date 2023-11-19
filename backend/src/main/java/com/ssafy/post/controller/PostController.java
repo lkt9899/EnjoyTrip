@@ -1,9 +1,9 @@
 package com.ssafy.post.controller;
 
 import com.ssafy.post.model.dto.Post;
-import com.ssafy.post.model.dto.data.PostRequest;
 import com.ssafy.post.model.service.PostService;
-import com.ssafy.util.dto.PagingInfo;
+import com.ssafy.util.dto.PageRequestDto;
+import com.ssafy.util.dto.PageResponseDto;
 import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RequestMapping("/post")
@@ -23,7 +22,6 @@ import java.util.Map;
 public class PostController {
 
     private final PostService postService;
-
     @PostMapping("/write")
     public ResponseEntity<String> write(@RequestBody Post post) throws SQLException {
         postService.insert(post);
@@ -31,9 +29,9 @@ public class PostController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<List<Post>> list(@RequestBody PagingInfo pagingInfo) throws SQLException {
-        List<Post> list = postService.selectAll(pagingInfo);
-        return ResponseEntity.status(HttpStatus.OK).body(list);
+    public ResponseEntity<PageResponseDto<Post>> list(@RequestBody PageRequestDto pageRequestDto) throws SQLException {
+        PageResponseDto<Post> response = postService.selectAll(pageRequestDto);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @GetMapping("/view/{postId}")
