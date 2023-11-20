@@ -41,15 +41,21 @@
     </select>
 
 	<select id="findById" parameterType="String" resultType="MemberLoginResponse">
-		select
-		    member_id memberId,
-		    id,
-		    password,
-		    name
-		from member
-		where id = #{id}
+      select
+          member_id memberId,
+          id,
+          password,
+          name
+      from member
+      where id = #{id}
 	</select>
 
+
+  <select id="getCountOfMember" resultType="int">
+      SELECT COUNT(*)
+      FROM member
+  </select>
+    
 	<update id="update" parameterType="memberUpdateRequest">
 		UPDATE member
 		SET

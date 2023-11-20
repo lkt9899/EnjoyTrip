@@ -28,7 +28,7 @@ public class PostService {
         int pagePerCount = pageRequestDto.getCount();
         int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
 
-        int totalPostCount = mapper.selectTotalCount();
+        int totalPostCount = mapper.getTotalPostCount();
         int totalPageCount = totalPostCount / pagePerCount + ((totalPostCount % pagePerCount==0)? 0 : 1);
 
         return PageResponseDto.<Post>builder()
@@ -40,7 +40,6 @@ public class PostService {
 
     @Transactional
     public Post select(int postId) throws SQLException{
-
         mapper.updateHit(postId);
         return mapper.select(postId);
     }

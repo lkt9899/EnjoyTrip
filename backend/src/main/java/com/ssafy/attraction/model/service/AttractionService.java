@@ -27,6 +27,10 @@ public class AttractionService {
 
       return list;
    }
+   public int selectCountOfAttraction() throws SQLException {
+      return mapper.selectCountOfAttraction();
+   }
+
 
 
 

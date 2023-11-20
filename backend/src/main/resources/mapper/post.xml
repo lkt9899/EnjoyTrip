@@ -49,7 +49,7 @@
 
 
 	<!-- 게시글 갯수 조회 -->
-	<select id="selectTotalCount" parameterType="map" resultType="int">
+	<select id="getTotalPostCount" parameterType="map" resultType="int">
 		select count(post_id)
 		from post
 <!--		<where>-->

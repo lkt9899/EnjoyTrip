@@ -14,7 +14,7 @@ public interface PostRepository {
     //게시글 목록
     List<Post> getPostsPerPage(PageRequestDto pageRequestDto) throws SQLException;
     // 전체 게시글 수 조회
-    int selectTotalCount() throws SQLException;
+    int getTotalPostCount() throws SQLException;
     // 게시글 상세 조회
     Post select(int postId) throws SQLException;
     void updateHit(int postId) throws  SQLException;
