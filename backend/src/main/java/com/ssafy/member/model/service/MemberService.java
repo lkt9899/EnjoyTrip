@@ -17,6 +17,9 @@ public class MemberService {
 
     private final MemberRepository mapper;
 
+    public int getCountOfMember() {
+      return mapper.getCountOfMember();
+    }
     @Transactional
     public MemberLoginResponse register(Member member) {
         // 아이디 중복 여부 확인

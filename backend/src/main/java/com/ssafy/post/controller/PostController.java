@@ -1,7 +1,6 @@
 package com.ssafy.post.controller;
 
 import com.ssafy.post.model.dto.Post;
-import com.ssafy.post.model.dto.data.PostRequest;
 import com.ssafy.post.model.service.PostService;
 import com.ssafy.util.dto.PagingInfo;
 import io.swagger.annotations.Api;

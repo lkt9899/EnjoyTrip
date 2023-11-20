@@ -25,5 +25,9 @@ public class AttractionService {
    public List<Attraction> select(QueryParams params) throws SQLException{
       return mapper.selectByScroll(params);
    }
+   public int selectCountOfAttraction() throws SQLException {
+      return mapper.selectCountOfAttraction();
+   }
+
 
 }

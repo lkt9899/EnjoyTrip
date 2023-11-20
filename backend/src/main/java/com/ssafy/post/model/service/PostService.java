@@ -33,6 +33,10 @@ public class PostService {
         return mapper.select(postId);
     }
 
+    public int selectCountOfPost() throws SQLException {
+        return mapper.selectCountOfPost();
+    }
+
     @Transactional
     public void update(Post post) throws SQLException{
         mapper.update(post);

@@ -10,6 +10,7 @@ import org.apache.ibatis.annotations.Mapper;
 public interface MemberRepository {
    void register(Member member);
    int existsById(String id);
+   int getCountOfMember();
    MemberLoginResponse findById(String id);
    MemberInfoResponse findByMemberId(int memberId);
    void update(MemberUpdateRequest member);
