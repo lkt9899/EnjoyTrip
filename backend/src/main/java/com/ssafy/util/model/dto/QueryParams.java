@@ -1,7 +1,5 @@
-package com.ssafy.util.dto;
+package com.ssafy.util.model.dto;
 
-import com.ssafy.util.dto.SearchCondition;
-import com.ssafy.util.dto.PagingInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

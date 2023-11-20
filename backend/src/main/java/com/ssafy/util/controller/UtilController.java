@@ -3,7 +3,8 @@ package com.ssafy.util.controller;
 import com.ssafy.attraction.model.service.AttractionService;
 import com.ssafy.member.model.service.MemberService;
 import com.ssafy.post.model.service.PostService;
-import com.ssafy.util.dto.Statistics;
+import com.ssafy.util.model.dto.Statistics;
+import com.ssafy.util.model.service.UtilService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,22 +18,11 @@ import java.sql.SQLException;
 @RestController
 @RequestMapping("/util")
 public class UtilController {
+    private final UtilService utilService;
 
-  private final AttractionService attractionService;
-  private final MemberService memberService;
-  private final PostService postService;
-
-  @GetMapping("/statistics")
-  public ResponseEntity<?> getStatistics(){
-    try {
-      int countOfAttraction = attractionService.selectCountOfAttraction();
-      int countOfMember = memberService.selectCountOfMember();
-      int countOfPost = postService.selectCountOfPost();
-       return ResponseEntity.status(HttpStatus.OK).body(
-               new Statistics(countOfAttraction, countOfMember, countOfPost));
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
+    @GetMapping("/statistics")
+    public ResponseEntity<Statistics> getStatistics(){
+        Statistics statistics = utilService.getCount();
+        return ResponseEntity.status(HttpStatus.OK).body(statistics);
     }
-  }
-
 }
