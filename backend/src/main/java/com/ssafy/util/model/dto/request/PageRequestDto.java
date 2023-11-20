@@ -1,15 +1,6 @@
 package com.ssafy.util.model.dto.request;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import com.ssafy.util.model.dto.PagingInfo;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-public class PageRequestDto {
-  private int offset; //시작점
-  private int count; //한 페이지당 데이터 수
+public class PageRequestDto extends PagingInfo {
 }
