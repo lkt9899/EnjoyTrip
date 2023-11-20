@@ -11,20 +11,28 @@ const router = createRouter({
 
         // member
         {
-            path: '/login',
-            name: 'login',
-            component: () => import('../views/LoginView.vue'),
+            path: "/member",
+            name: 'member',
+            component: () => import("@/views/TheMemberView.vue"),
+            children: [
+                {
+                    path: "register",
+                    name: "user-register",
+                    component: () => import("@/components/member/Register.vue"),
+                },
+                {
+                    path: "login",
+                    name: "user-login",
+                    component: () => import("@/components/member/Login.vue"),
+                },
+                {
+                    path: '/info',
+                    name: 'userinfo',
+                    component: () => import('../views/UserInfoView.vue'),
+                },
+            ]
         },
-        {
-            path: '/signup',
-            name: 'signup',
-            component: () => import('../views/SignUpView.vue'),
-        },
-        {
-            path: '/info',
-            name: 'userinfo',
-            component: () => import('../views/UserInfoView.vue'),
-        },
+        
 
         // TODO: notice view 만들기
         // notice
