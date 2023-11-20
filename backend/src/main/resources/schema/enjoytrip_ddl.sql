@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `hot_place` (
     `hot_place_id` int not null primary key auto_increment,
     `member_id` int not null,
     `content_id` int not null,
-    `content_type_id` int not null,
     `title` varchar(50) not null,
     `desc` varchar(500) not null,
     `hit` int not null default 0,
@@ -66,8 +65,7 @@ CREATE TABLE IF NOT EXISTS `hot_place` (
     `reg_date` timestamp not null default current_timestamp,
     `mod_date` timestamp not null default current_timestamp,
     foreign key (`member_id`) references MEMBER (`member_id`),
-    foreign key (`content_id`) references ATTRACTION_INFO (`content_id`),
-    foreign key (`content_type_id`) references ATTRACTION_INFO (`content_type_id`)
+    foreign key (`content_id`) references ATTRACTION_INFO (`content_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 

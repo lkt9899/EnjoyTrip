@@ -1,82 +1,55 @@
 package com.ssafy.member.controller;
 
 import com.ssafy.member.model.dto.Member;
-import com.ssafy.member.model.dto.MemberLoginRequest;
+import com.ssafy.member.model.dto.data.request.MemberLoginRequest;
+import com.ssafy.member.model.dto.data.request.MemberUpdateRequest;
+import com.ssafy.member.model.dto.data.response.MemberLoginResponse;
 import com.ssafy.member.model.service.MemberService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.sql.SQLException;
 
-
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberController {
 
-    private final MemberService memberServiceImpl;
+    private final MemberService memberService;
 
-    @PostMapping ("/register")
-    public ResponseEntity<String> register(@RequestBody Member member){
-        try {
-            memberServiceImpl.register(member);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
-        } catch (SQLException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
-        }
+    @PostMapping("/register")
+    public ResponseEntity<MemberLoginResponse> register(@RequestBody Member member) {
+        MemberLoginResponse loginMember = memberService.register(member);
+        log.info("=====loginMember======= "+loginMember);
+        return ResponseEntity.status(HttpStatus.CREATED).body(loginMember);
     }
 
-    @PostMapping ("/login")
-    public ResponseEntity<?> login(@RequestBody MemberLoginRequest req){
-        try {
-            Member member = memberServiceImpl.login(req.getId(), req.getPassword());
-            if(member != null)
-                return ResponseEntity.status(HttpStatus.OK).body(member);
-            else
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        } catch (SQLException e) {
-            return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PostMapping("/login")
+    public ResponseEntity<MemberLoginResponse> login(@RequestBody MemberLoginRequest req) {
+        MemberLoginResponse res = memberService.login(req.getId(), req.getPassword());
+        return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 
-    @GetMapping("/logout")
-    public ResponseEntity<?> logout(HttpSession session){
-        if(session.getAttribute("userinfo") != null ) session.invalidate(); //session 소멸
+    @PostMapping("/logout")
+    public ResponseEntity<Void> logout(HttpSession session) {
+        if (session.getAttribute("loginInfo") != null)
+            session.invalidate(); // session 소멸
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PostMapping("/update")
-    public ResponseEntity<?> update(@RequestParam Member member){
-        try {
-            memberServiceImpl.update(member);
-            return new ResponseEntity<>("success", HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @PutMapping("/update")
+    public ResponseEntity<Void> update(@RequestBody MemberUpdateRequest member) {
+        memberService.update(member);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
-    @PostMapping("/delete")
-    public ResponseEntity<?> delete(@RequestParam int memberId) {
-        try {
-            memberServiceImpl.delete(memberId);
-            return new ResponseEntity<>("success", HttpStatus.OK);
-        } catch (SQLException e) {
-            return new ResponseEntity<>("error", HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @DeleteMapping("/delete")
+    public ResponseEntity<Void> delete(@RequestBody int memberId) {
+        memberService.delete(memberId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
-
-
-
-
-
-
 }

@@ -1,19 +1,18 @@
 package com.ssafy.member.model.dao;
 
 import com.ssafy.member.model.dto.Member;
+import com.ssafy.member.model.dto.data.request.MemberUpdateRequest;
+import com.ssafy.member.model.dto.data.response.MemberInfoResponse;
+import com.ssafy.member.model.dto.data.response.MemberLoginResponse;
 import org.apache.ibatis.annotations.Mapper;
-
-import java.sql.SQLException;
-
 
 @Mapper
 public interface MemberRepository {
-
-   void register(Member member) throws SQLException;
-   Member select(String id) throws SQLException;
-   int selectCountOfMember() throws SQLException;
-   void update(Member member) throws SQLException;
-   void delete(int memberId) throws SQLException;
-
-
+   void register(Member member);
+   int existsById(String id);
+   int getCountOfMember();
+   MemberLoginResponse findById(String id);
+   MemberInfoResponse findByMemberId(int memberId);
+   void update(MemberUpdateRequest member);
+   void delete(int memberId);
 }
