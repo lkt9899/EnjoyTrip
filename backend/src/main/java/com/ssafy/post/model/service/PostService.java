@@ -26,14 +26,14 @@ public class PostService {
     public PageResponseDto<Post> getPostsPerPage(PageRequestDto pageRequestDto) throws SQLException{
 
         int pagePerCount = pageRequestDto.getCount();
-        int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
+//        int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
 
         int totalPostCount = mapper.getTotalPostCount();
         int totalPageCount = totalPostCount / pagePerCount + ((totalPostCount % pagePerCount==0)? 0 : 1);
 
         return PageResponseDto.<Post>builder()
                 .list(mapper.getPostsPerPage(pageRequestDto))
-                .currentPageNum(currentPageNum)
+                .currentPageNum(pageRequestDto.getCurrentPageNum())
                 .totalPageCount(totalPageCount)
                 .build();
     }
