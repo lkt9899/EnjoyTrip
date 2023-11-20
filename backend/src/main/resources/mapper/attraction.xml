@@ -52,4 +52,38 @@
 				AND content_type_id = #{contentTypeId}
 			</if>
 	</select>
+
+	<!--게시글 목록 : 스크롤-->
+	<select id="selectByScroll" parameterType="queryParams" resultMap="attractionResponse">
+		SELECT
+		content_id,
+		content_type_id,
+		title,
+		addr1,
+		addr2,
+		zipcode,
+		tel,
+		first_image,
+		first_image2,
+		readCount,
+		sido_code,
+		gugun_code,
+		latitude,
+		longitude,
+		mlevel
+		FROM attraction_info
+		WHERE content_id > #{pagingInfo.offset}
+		<if test="searchCondition.sidoCode != null">
+			AND sido_code = #{searchCondition.sidoCode}
+		</if>
+		<if test="searchCondition.gugunCode != null">
+			AND gugun_code = #{searchCondition.gugunCode}
+		</if>
+		<if test="searchCondition.contentTypeId != null">
+			AND content_type_id = #{searchCondition.contentTypeId}
+		</if>
+		ORDER BY content_id
+		LIMIT #{pagingInfo.count}
+	</select>
+
 </mapper>
