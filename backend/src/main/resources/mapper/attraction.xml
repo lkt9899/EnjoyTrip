@@ -53,13 +53,13 @@
 			</if>
 	</select>
 	
-	<select id="selectCountOfAttraction" resultType="int">
+	<select id="getCountOfAttraction" resultType="int">
 		SELECT COUNT(*) as count
 		FROM attraction_info
 	</select>
 
 	<!--게시글 목록 : 스크롤-->
-	<select id="selectByScroll" parameterType="queryParams" resultMap="attractionResponse">
+	<select id="getAttractionPerPage" parameterType="queryParams" resultMap="attractionResponse">
 		SELECT
 		content_id,
 		content_type_id,
