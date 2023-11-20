@@ -18,7 +18,7 @@ public class AttractionService {
 
    private final AttractionRepository mapper;
    public List<Attraction> select(QueryParams params) {
-      List<Attraction> list = null;
+      List<Attraction> list;
       list = mapper.getAttractionPerPage(params);
       if(list == null || list.isEmpty())
          throw new AttractionException(AttractionErrorCode.NO_CONTENTS_WITH_CONDITION);
