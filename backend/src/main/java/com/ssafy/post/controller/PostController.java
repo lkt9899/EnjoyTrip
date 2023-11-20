@@ -30,7 +30,7 @@ public class PostController {
 
     @PostMapping("/list")
     public ResponseEntity<PageResponseDto<Post>> list(@RequestBody PageRequestDto pageRequestDto) throws SQLException {
-        PageResponseDto<Post> response = postService.selectAll(pageRequestDto);
+        PageResponseDto<Post> response = postService.getPostsPerPage(pageRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 

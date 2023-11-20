@@ -23,7 +23,7 @@ public class PostService {
         mapper.insert(post);
     }
 
-    public PageResponseDto<Post> selectAll(PageRequestDto pageRequestDto) throws SQLException{
+    public PageResponseDto<Post> getPostsPerPage(PageRequestDto pageRequestDto) throws SQLException{
 
         int pagePerCount = pageRequestDto.getCount();
         int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
@@ -31,13 +31,11 @@ public class PostService {
         int totalPostCount = mapper.selectTotalCount();
         int totalPageCount = totalPostCount / pagePerCount + ((totalPostCount % pagePerCount==0)? 0 : 1);
 
-        PageResponseDto<Post> pageResponseDto = PageResponseDto.<Post>builder()
-                .list(mapper.selectAll(pageRequestDto))
+        return PageResponseDto.<Post>builder()
+                .list(mapper.getPostsPerPage(pageRequestDto))
                 .currentPageNum(currentPageNum)
                 .totalPageCount(totalPageCount)
                 .build();
-
-        return pageResponseDto;
     }
 
     @Transactional

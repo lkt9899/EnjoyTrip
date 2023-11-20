@@ -12,7 +12,7 @@ public interface PostRepository {
     // 게시글 작성
     void insert(Post post) throws SQLException;
     //게시글 목록
-    List<Post> selectAll(PageRequestDto pageRequestDto) throws SQLException;
+    List<Post> getPostsPerPage(PageRequestDto pageRequestDto) throws SQLException;
     // 전체 게시글 수 조회
     int selectTotalCount() throws SQLException;
     // 게시글 상세 조회
