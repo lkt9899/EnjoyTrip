@@ -27,8 +27,6 @@ class PostServiceTest {
     PageResponseDto<Post> result = null;
     try {
       result = postService.getPostsPerPage(pageRequestDto);
-    } catch (SQLException e) {
-      throw new RuntimeException(e);
     } finally {
       //then
       assertNotNull(result);

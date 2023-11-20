@@ -5,7 +5,6 @@ import com.ssafy.util.model.dto.QueryParams;
 import com.ssafy.util.model.dto.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Mapper

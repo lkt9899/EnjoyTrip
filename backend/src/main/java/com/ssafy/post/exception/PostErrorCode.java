@@ -9,9 +9,9 @@ public enum PostErrorCode implements ErrorCode {
     NO_AUTHORITY_OF_POST(401, "POST_02", "로그인 후 이용 가능합니다."),
     NOT_AUTHOR(401, "POST_03", "작성자만 접근 가능합니다.");
 
-    private int statusCode;
-    private String errorCode;
-    private String message;
+    private final int statusCode;
+    private final String errorCode;
+    private final String message;
 
     PostErrorCode(int statusCode, String errorCode, String message) {
         this.statusCode = statusCode;

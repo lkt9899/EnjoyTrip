@@ -4,13 +4,11 @@ import com.ssafy.attraction.exception.AttractionErrorCode;
 import com.ssafy.attraction.exception.AttractionException;
 import com.ssafy.attraction.model.dao.AttractionRepository;
 import com.ssafy.attraction.model.dto.Attraction;
-
 import com.ssafy.util.model.dto.QueryParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.SQLException;
 import java.util.List;
 
 @Transactional(readOnly = true)
@@ -26,8 +24,5 @@ public class AttractionService {
          throw new AttractionException(AttractionErrorCode.NO_CONTENTS_WITH_CONDITION);
 
       return list;
-   }
-   public int selectCountOfAttraction() {
-      return mapper.getCountOfAttraction();
    }
 }
