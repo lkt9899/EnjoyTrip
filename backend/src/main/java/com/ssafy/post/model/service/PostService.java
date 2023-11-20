@@ -2,15 +2,15 @@ package com.ssafy.post.model.service;
 
 import com.ssafy.post.model.dao.PostRepository;
 import com.ssafy.post.model.dto.Post;
-import com.ssafy.util.dto.PagingInfo;
+import com.ssafy.util.dto.PageRequestDto;
+import com.ssafy.util.dto.PageResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 
 @Transactional(readOnly = true)
 @Service
@@ -23,18 +23,25 @@ public class PostService {
         mapper.insert(post);
     }
 
-    public List<Post> selectAll(PagingInfo pagingInfo) throws SQLException{
-        return mapper.selectAll(pagingInfo);
+    public PageResponseDto<Post> getPostsPerPage(PageRequestDto pageRequestDto) throws SQLException{
+
+        int pagePerCount = pageRequestDto.getCount();
+        int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
+
+        int totalPostCount = mapper.getTotalPostCount();
+        int totalPageCount = totalPostCount / pagePerCount + ((totalPostCount % pagePerCount==0)? 0 : 1);
+
+        return PageResponseDto.<Post>builder()
+                .list(mapper.getPostsPerPage(pageRequestDto))
+                .currentPageNum(currentPageNum)
+                .totalPageCount(totalPageCount)
+                .build();
     }
 
     @Transactional
     public Post select(int postId) throws SQLException{
         mapper.updateHit(postId);
         return mapper.select(postId);
-    }
-
-    public int selectCountOfPost() throws SQLException {
-        return mapper.selectCountOfPost();
     }
 
     @Transactional

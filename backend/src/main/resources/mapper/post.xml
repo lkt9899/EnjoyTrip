@@ -39,18 +39,22 @@
 	</insert>
 
 	<!--게시글 목록-->
-	<select id="selectAll" parameterType="pagingInfo" resultMap="postResponse">
+	<select id="getPostsPerPage" parameterType="pageRequestDto" resultMap="postResponse">
 		SELECT post_id, author_id, title, content, hit
 		FROM post
-		WHERE post_id > #{offset}
+		WHERE post_id >= #{offset}
 		ORDER BY post_id
 			LIMIT #{count}
 	</select>
 
+
 	<!-- 게시글 갯수 조회 -->
-	<select id="selectCountOfPost" resultType="int">
-		SELECT COUNT(*) as count
-		FROM post
+	<select id="getTotalPostCount" parameterType="map" resultType="int">
+		select count(post_id)
+		from post
+<!--		<where>-->
+<!--			<include refid="search"></include>-->
+<!--		</where>-->
 	</select>
 
 <!--	게시글 상세 조회-->
