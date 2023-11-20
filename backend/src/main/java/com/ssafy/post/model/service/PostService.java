@@ -48,11 +48,16 @@ public class PostService {
 
     @Transactional
     public void update(Post post) {
+        if(mapper.existById(post.getPostId()) == 0)
+            throw new PostException(PostErrorCode.NOT_EXIST_POST);
+
         mapper.update(post);
     }
 
     @Transactional
     public void delete(int postId) {
+        if(mapper.existById(postId) == 0)
+            throw new PostException(PostErrorCode.NOT_EXIST_POST);
         mapper.delete(postId);
     }
 }

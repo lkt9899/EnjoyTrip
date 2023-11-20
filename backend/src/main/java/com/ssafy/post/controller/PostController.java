@@ -20,9 +20,9 @@ public class PostController {
 
     private final PostService postService;
     @PostMapping("/write")
-    public ResponseEntity<String> write(@RequestBody Post post) {
+    public ResponseEntity<Void> write(@RequestBody Post post) {
         postService.insert(post);
-        return ResponseEntity.status(HttpStatus.CREATED).body("created");
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/list")
@@ -38,13 +38,13 @@ public class PostController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> update(@RequestBody Post post) {
+    public ResponseEntity<Void> update(@RequestBody Post post) {
         postService.update(post);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @DeleteMapping("/{postId}")
-    public ResponseEntity<String> delete(@PathVariable int postId) {
+    public ResponseEntity<Void> delete(@PathVariable int postId) {
         postService.delete(postId);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
