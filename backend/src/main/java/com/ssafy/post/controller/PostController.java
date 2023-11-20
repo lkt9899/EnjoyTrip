@@ -25,7 +25,7 @@ public class PostController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("/list")
+    @GetMapping("/list")
     public ResponseEntity<PageResponseDto<Post>> list(@RequestBody PageRequestDto pageRequestDto) {
         PageResponseDto<Post> response = postService.getPostsPerPage(pageRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(response);

@@ -20,18 +20,20 @@ class PostServiceTest {
   void selectAll(){
     //given
     PageRequestDto pageRequestDto = new PageRequestDto();
-    pageRequestDto.setCount(5);
-    pageRequestDto.setOffset(7);
-
+    pageRequestDto.setLastItemId(0);
+    System.out.println(pageRequestDto.getFirstItemId());
     PageResponseDto<Post> result = null;
     try {
       result = postService.getPostsPerPage(pageRequestDto);
     } finally {
       //then
       assertNotNull(result);
-      assertEquals(1, result.getList().size());
-      assertEquals(2, result.getCurrentPageNum());
-
+      assertEquals(5, result.getList().size());
+      for (Post p : result.getList()){
+        System.out.println(p);
+      }
+      assertEquals(false, result.isHasPrev());
+      assertEquals(true, result.isHasNext());
     }
 
   }
