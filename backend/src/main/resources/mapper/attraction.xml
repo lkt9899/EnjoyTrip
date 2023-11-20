@@ -83,7 +83,11 @@
 			AND content_type_id = #{searchCondition.contentTypeId}
 		</if>
 		ORDER BY content_id
-		LIMIT #{pagingInfo.count}
+		LIMIT #{pagingInfo.COUNT}
+	</select>
+
+	<select id="getAttractionInfo" resultType="">
+
 	</select>
 
 </mapper>

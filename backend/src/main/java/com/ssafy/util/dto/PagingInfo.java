@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class PagingInfo {
-  private int offset;
-  private static final int COUNT = 5;
+    private int offset;
+    private static final int COUNT = 5;
 }
