@@ -1,6 +1,6 @@
-package com.ssafy.attraction.model.dto;
+package com.ssafy.util.dto;
 
-import com.ssafy.attraction.model.dto.SearchCondition;
+import com.ssafy.util.dto.SearchCondition;
 import com.ssafy.util.dto.PagingInfo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,6 +10,6 @@ import lombok.Setter;
 @Getter
 @NoArgsConstructor
 public class QueryParams {
-  SearchCondition searchCondition;
-  PagingInfo pagingInfo;
+  private SearchCondition searchCondition;
+  private PagingInfo pagingInfo;
 }
