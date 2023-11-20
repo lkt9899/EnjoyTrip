@@ -1,4 +1,4 @@
-package com.ssafy.attraction.model.dto;
+package com.ssafy.util.dto;
 
 import lombok.*;
 

@@ -19,9 +19,9 @@ mybatis:
 
 logging:
   level:
-    com.ssafy: trace
-    org.springframework.transaction: trace
-    org.springframework.jdbc: trace
+    com.ssafy: debug
+    org.springframework.transaction: debug
+    org.springframework.jdbc: debug
 
 server:
   servlet:

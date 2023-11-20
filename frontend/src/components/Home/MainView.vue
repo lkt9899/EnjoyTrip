@@ -1,5 +1,6 @@
 <script setup>
 import MainData from "./MainData.vue";
+import MainMiddle from './MainMiddle.vue';
 </script>
 
 <template>
@@ -8,6 +9,7 @@ import MainData from "./MainData.vue";
             <img class="bg-img" src="@/assets/background.jpg" alt="back">
         </div>
         <MainData />
+        <MainMiddle/>
     </div>
 </template>
 
