@@ -9,12 +9,8 @@ import java.util.List;
 
 @Mapper
 public interface AttractionRepository {
-
    List<Attraction> select(SearchCondition condition);
-   int getCountOfAttraction();
-
-
    List<Attraction> getAttractionPerPage(QueryParams params);
-
+   int getCountOfAttraction();
 
 }

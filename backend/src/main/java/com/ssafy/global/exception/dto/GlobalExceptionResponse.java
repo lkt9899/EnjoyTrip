@@ -13,10 +13,6 @@ public class GlobalExceptionResponse {
     private String errorCode;
 
     public static ResponseEntity<GlobalExceptionResponse> toResponse(GlobalException e) {
-        System.out.println(e.getStatusCode());
-        System.out.println(e.getErrorCode());
-        System.out.println(e.getMessage());
-
         return ResponseEntity
                 .status(e.getStatusCode())
                 .body(GlobalExceptionResponse.builder()
