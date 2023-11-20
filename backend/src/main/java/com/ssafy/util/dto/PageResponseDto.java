@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PageResponseDto<T> {
-  List<T> list;
-  int currentPageNum;
-  int totalPageCount;
+  private List<T> list;
+  private int currentPageNum;
+  private int totalPageCount;
 }

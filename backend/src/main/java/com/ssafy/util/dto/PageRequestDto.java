@@ -12,4 +12,5 @@ import lombok.Setter;
 public class PageRequestDto {
   private int offset; //시작점
   private int count; //한 페이지당 데이터 수
+  private int currentPageNum; //페이지 번호
 }
