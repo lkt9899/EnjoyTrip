@@ -26,4 +26,4 @@ logging:
 server:
   servlet:
     context-path: /trip
-  port: 80
+  port: 8080

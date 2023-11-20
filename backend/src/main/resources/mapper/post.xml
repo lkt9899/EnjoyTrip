@@ -57,9 +57,15 @@
 <!--		</where>-->
 	</select>
 
-<!--	게시글 상세 조회-->
+	<!--	게시글 상세 조회-->
 	<select id="select" parameterType="int" resultMap="postResponse">
 		SELECT post_id, author_id, title, content, hit
+		FROM post
+		WHERE post_id = #{postId}
+	</select>
+
+	<select id="existById" parameterType="int" resultType="int">
+		SELECT COUNT(post_id)
 		FROM post
 		WHERE post_id = #{postId}
 	</select>
