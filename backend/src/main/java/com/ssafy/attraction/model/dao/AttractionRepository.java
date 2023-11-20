@@ -1,8 +1,8 @@
 package com.ssafy.attraction.model.dao;
 
 import com.ssafy.attraction.model.dto.Attraction;
-import com.ssafy.attraction.model.dto.QueryParams;
-import com.ssafy.attraction.model.dto.SearchCondition;
+import com.ssafy.util.dto.QueryParams;
+import com.ssafy.util.dto.SearchCondition;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.SQLException;
