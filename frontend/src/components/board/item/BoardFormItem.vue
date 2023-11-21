@@ -114,8 +114,8 @@ function moveList() {
       <input
         type="text"
         class="form-control"
-        name = "postId"
-        v-model="post.postId"
+        name = "authorId"
+        v-model="post.authorId"
         :disabled="isUseId"
         placeholder="작성자ID..."
       />
