@@ -11,7 +11,7 @@ const onSelect = () => {
 </script>
 
 <template>
-  <select v-model="key" class="form-select form-select-sm w-50" @change="onSelect">
+  <select v-model="key" class="form-select form-select-sm w-100" @change="onSelect">
     <option v-for="option in selectOption" :key="option.value" :value="option.value"
       :disabled="option.value === '' ? true : false">
       {{ option.text }}

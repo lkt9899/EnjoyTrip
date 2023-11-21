@@ -1,15 +1,9 @@
 <script setup>
-import NavBar from "../components/layout/NavBar.vue";
-import MainView from "../components/Home/MainView.vue";
-import MyFooter from "../components/layout/MyFooter.vue";
+import MainView from '@/components/Home/MainView.vue';
 </script>
 
 <template>
-    <div class="container">
-        <NavBar />
-        <MainView />
-        <MyFooter />
-    </div>
+    <MainView />
 </template>
 
 <style scoped></style>
