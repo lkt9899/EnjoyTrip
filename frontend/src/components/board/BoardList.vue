@@ -53,6 +53,23 @@ const getPostList = () => {
     )
 };
 
+const goNextPage = () =>{
+  console.log("서버에서 next 버튼 데이터 얻어오자!!!");
+  const lastItem = posts.value[posts.value.length - 1];
+  const lastItemId = lastItem ? lastItem.postId : 0;
+  param.value.lastItemId = lastItemId;
+  console.log(lastItem.postId)
+  param.value.firstItemId = -1;
+  getPostList();
+}
+
+const goPrevPage = () =>{
+  console.log("서버에서 prev 버튼 데이터 얻어오자!!!");
+  param.value.firstItemId = posts.value[0].postId;
+  param.value.lastItemId = -1;
+  getPostList();
+}
+
 // const onPageChange = (val) => {
 //   console.log(val + "번 페이지로 이동 준비 끝!!!");
 //   currentPage.value = val;
@@ -69,7 +86,6 @@ const moveWrite = () => {
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-10">
-        <!-- {{posts  }} -->
         <h2 class="my-3 py-3 shadow-sm bg-light text-center">           
           <mark class="sky">글목록</mark>
         </h2>
@@ -114,11 +130,23 @@ const moveWrite = () => {
           </tbody>
         </table>
       </div>
-      <!-- <VPageNavigation
-        :current-page="currentPage"
-        :total-page="totalPage"
-        @pageChange="onPageChange"
-      ></VPageNavigation> -->
+      <div class="row">
+        <ul class="pagination justify-content-center">
+          <li class="page-item">
+            <a class="page-link" 
+              @click="goPrevPage()"
+              :class="{ 'disabled': !hasPrev }"
+              :aria-disabled="!hasPrev"
+              >이전</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" 
+              @click="goNextPage()"
+              :class="{'disabled' : !hasNext}"
+              :aria-disabled="!hasNext">다음</a>
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
