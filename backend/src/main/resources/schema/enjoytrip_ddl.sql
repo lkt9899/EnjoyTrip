@@ -87,6 +87,7 @@ CREATE TABLE IF NOT EXISTS `plan` (
     `reg_date` timestamp default current_timestamp,
     `mod_date` timestamp default current_timestamp,
     foreign key (`member_id`) references MEMBER (`member_id`)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 여행 세부 계획
@@ -94,13 +95,11 @@ CREATE TABLE IF NOT EXISTS `plan_detail` (
     `plan_detail_id` int primary key auto_increment,
     `plan_id` int not null,
     `content_id` int not null,
-    `order` int not null default 0,
-    `reg_date` timestamp not null default current_timestamp,
-    `mod_date` timestamp not null default current_timestamp,
-    foreign key (`plan_id`) references PLAN (`plan_id`),
+    foreign key (`plan_id`) references PLAN (`plan_id`)
+    ON DELETE CASCADE,
     foreign key (`content_id`) references ATTRACTION_INFO (`content_id`)
+    ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 --
 CREATE TABLE IF NOT EXISTS `LOGIN` (
     `authentication_key` varchar(100) primary key,

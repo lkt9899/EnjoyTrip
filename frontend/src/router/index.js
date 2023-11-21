@@ -39,6 +39,13 @@ const router = createRouter({
         //     ]
         // },
 
+        // attraction
+        {
+            path: '/attraction',
+            name: 'attraction',
+            component: () => import('@/views/AttractionView.vue'),
+        },
+
         // TODO: notice view 만들기
         // notice
         {
