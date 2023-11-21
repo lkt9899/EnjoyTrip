@@ -1,7 +1,9 @@
 package com.ssafy.util.model.dto.response;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.List;
 @Setter
 @Builder
 public class PageResponseDto<T> {
-  List<T> list;
-  int currentPageNum;
-  int totalPageCount;
+  private List<T> list;
+  private boolean hasNext;
+  private boolean hasPrev;
 }

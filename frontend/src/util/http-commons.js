@@ -7,9 +7,9 @@ const { VITE_APP_API_BASE_URL } = import.meta.env;
 function localAxios() {
     const instance = axios.create({
         baseURL: VITE_APP_API_BASE_URL,
-        // headers: {
-        //     'Content-Type': 'application/json;charset=utf-8',
-        // },
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+        },
     });
     // Request 발생 시 적용할 내용
     instance.defaults.headers.common['Authorization'] = '';

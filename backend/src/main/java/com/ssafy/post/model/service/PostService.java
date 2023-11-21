@@ -4,11 +4,14 @@ import com.ssafy.post.exception.PostErrorCode;
 import com.ssafy.post.exception.PostException;
 import com.ssafy.post.model.dao.PostRepository;
 import com.ssafy.post.model.dto.Post;
+import com.ssafy.post.model.dto.response.PostResponse;
 import com.ssafy.util.model.dto.request.PageRequestDto;
 import com.ssafy.util.model.dto.response.PageResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 
 @Transactional(readOnly = true)
@@ -22,19 +25,27 @@ public class PostService {
         mapper.insert(post);
     }
 
-    public PageResponseDto<Post> getPostsPerPage(PageRequestDto pageRequestDto) {
+    public PageResponseDto<PostResponse> getPostsPerPage(PageRequestDto pageRequestDto) {
 
-        int pagePerCount = pageRequestDto.getCount();
-        int currentPageNum = pageRequestDto.getOffset() / pagePerCount + 1;
+        List<PostResponse> postList = mapper.getPostsPerPage(pageRequestDto);
+        int lastPostId = mapper.getLastPostId();
+        int firstPostId = mapper.getFirstPostId();
 
-        int totalPostCount = mapper.getTotalPostCount();
-        int totalPageCount = totalPostCount / pagePerCount + ((totalPostCount % pagePerCount==0)? 0 : 1);
-
-        return PageResponseDto.<Post>builder()
-                .list(mapper.getPostsPerPage(pageRequestDto))
-                .currentPageNum(currentPageNum)
-                .totalPageCount(totalPageCount)
-                .build();
+        if (pageRequestDto.getLastItemId()!= -1){ //다음 페이지를 요청했다면
+            return PageResponseDto.<PostResponse>builder()
+                    .list(postList)
+                    .hasPrev(firstPostId >= pageRequestDto.getLastItemId()?false: true)
+                    .hasNext( (postList.get(postList.size()-1).getPostId() == lastPostId)? false: true)
+                    .build();
+        }
+        if(pageRequestDto.getFirstItemId()!= -1){ //이전 페이지를 요청했다면
+            return PageResponseDto.<PostResponse>builder()
+                    .list(postList)
+                    .hasPrev( (postList.get(0).getPostId() == firstPostId) ? false : true )
+                    .hasNext(true)
+                    .build();
+        }
+        return null;
     }
 
     @Transactional
