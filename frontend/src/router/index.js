@@ -28,6 +28,12 @@ const router = createRouter({
             name: 'board-detail',
             component: () => import("@/views/BoardDetail.vue"),
         },
+        {
+            path: "/board-modify/:postId",
+            name: 'board-modify',
+            component: () => import("@/views/BoardModify.vue"),
+        },
+        
 
         // 혹시 구조를 바꾸게 될 예비용 주석! 
         // {

@@ -34,7 +34,7 @@ function moveList() {
 }
 
 function moveModify() {
-  // router.push({ name: "article-modify", params: { articleno } });
+  router.push({ name: "board-modify", params: { postId } });
 }
 
 function onDeletePost() {
