@@ -89,8 +89,8 @@
 	</select>
 
 	<!--	게시글 상세 조회-->
-	<select id="select" parameterType="int" resultMap="postResponse">
-		SELECT post_id, author_name, title, content, hit
+	<select id="select" parameterType="int" resultType="post">
+		SELECT post_id, author_id, title, content, hit, reg_date, mod_date
 		FROM post
 		WHERE post_id = #{postId}
 	</select>

@@ -4,8 +4,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
-//@Data
+@Data
 public abstract class BaseTimeEntity {
-    protected LocalDateTime regDate;
-    protected LocalDateTime modDate;
+    protected String regDate;
+    protected String modDate;
 }
