@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class PlanDetail {
+    private int planDetailId;
     private int contentId;
-    private int order;
 }

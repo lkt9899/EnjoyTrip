@@ -5,4 +5,99 @@
 
 <mapper namespace="com.ssafy.plan.model.dao.PlanRepository">
 
+	<!-- Plan resultMap -->
+	<resultMap id="planResponse" type="PlanDtoResponse">
+		<id property="planId" column="planId"/>
+		<result property="memberId" column="memberId"/>
+		<result property="title" column="c_title"/>
+		<collection property="attractionList" resultMap="attractionList"/>
+	</resultMap>
+
+	<resultMap id="attractionList" type="Attraction">
+		<id column="contentId" property="contentId"/>
+		<result column="contentTypeId" property="contentTypeId"/>
+		<result column="title" property="title"/>
+		<result column="addr1" property="addr1"/>
+		<result column="tel" property="tel"/>
+		<result column="firstImage" property="firstImage"/>
+		<result column="sidoCode" property="sidoCode"/>
+		<result column="gugunCode" property="gugunCode"/>
+		<result column="latitude" property="latitude"/>
+		<result column="longitude" property="longitude"/>
+	</resultMap>
+
+	<!-- Querys -->
+	<!-- 계획 작성 -->
+	<insert id="insert" parameterType="Plan" useGeneratedKeys="true" keyProperty="planId">
+		INSERT INTO plan(member_id, title, reg_date, mod_date)
+		VALUES (#{memberId}, #{title}, now(), now());
+	</insert>
+
+	<!-- 계획 경로 저장 -->
+	<insert id="insertDetails" parameterType="Plan">
+		INSERT INTO plan_detail(plan_id, content_id)
+		VALUES
+		<foreach collection="planDetailList" item="item" separator=",">
+			(#{planId}, #{item.contentId})
+		</foreach>
+	</insert>
+
+	<!-- 계획 보기 -->
+	<select id="findPlanById" resultMap="planResponse">
+		SELECT
+			ct.plan_id planId,
+			ct.member_id memberId,
+			ct.title c_title,
+			at.content_id contentId,
+			at.content_type_id contentTypeId,
+			at.title,
+			at.addr1,
+			at.tel,
+			at.first_image firstImage,
+			at.sido_code sidoCode,
+			at.gugun_code gugunCode,
+			at.latitude,
+			at.longitude
+		FROM (
+			SELECT
+				p.plan_id,
+				p.member_id,
+				p.title,
+				pd.plan_detail_id,
+				pd.content_id
+			FROM
+				plan p INNER JOIN plan_detail pd
+				ON p.plan_id = pd.plan_id
+			WHERE pd.plan_id = #{planId} ) ct
+				INNER JOIN attraction_info at
+			   	ON ct.content_id = at.content_id;
+	</select>
+
+	<!-- 존재 여부 확인 -->
+	<select id="existById" parameterType="int" resultType="int">
+		SELECT COUNT(plan_id)
+		FROM plan
+		WHERE plan_id = #{planId};
+	</select>
+
+	<!-- 여행 계획 수정 -->
+	<!-- 여행 계획 제목 수정 -->
+	<update id="updateName" parameterType="Plan">
+		UPDATE plan
+		SET
+		    title = #{title}
+		WHERE plan_id = #{planId}
+	</update>
+
+	<!-- 여행 계획 삭제 -->
+	<delete id="deleteDetails" parameterType="int">
+		DELETE FROM plan_detail
+		WHERE plan_id = #{planId};
+	</delete>
+	
+	<!-- 여행 계획 삭제 -->
+	<delete id="delete" parameterType="int">
+		DELETE FROM plan
+		WHERE plan_id = #{planId}
+	</delete>
 </mapper>

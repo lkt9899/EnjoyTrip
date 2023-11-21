@@ -7,17 +7,19 @@ import lombok.*;
 
 import java.util.List;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class Plan extends PlanDto {
-    private int planId;
+    private List<PlanDetail> planDetailList;
 
-    public Plan of(int planId, PlanDtoRequest planDtoRequest) {
-        return Plan.builder()
-                .planId(planId)
-                .build();
+    private Plan(PlanDtoRequest planDtoRequest) {
+        this.planId = planDtoRequest.getPlanId();
+        this.memberId = planDtoRequest.getMemberId();
+        this.title = planDtoRequest.getTitle();
+        this.planDetailList = planDtoRequest.getPlanDetailList();
+    }
+    public static Plan of(PlanDtoRequest planDtoRequest) {
+        return new Plan(planDtoRequest);
     }
 }
