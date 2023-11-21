@@ -14,10 +14,13 @@
 	<!-- PostResponse -->
 	<resultMap id="postResponse" type="postResponse">
 		<id property="postId" column="post_id" />
-		<result property="authorName" column="author_name"/>
+		<result property="authorId" column="authorId"/>
+		<result property="authorName" column="authorName"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="hit" column="hit"/>
+		<result property="regDate" column="reg_date"/>
+		<result property="modDate" column="modDate"/>
 	</resultMap>
 
 	<!-- 조건 검색 -->
@@ -89,9 +92,19 @@
 	</select>
 
 	<!--	게시글 상세 조회-->
-	<select id="select" parameterType="int" resultMap="postResponse">
-		SELECT post_id, author_name, title, content, hit
-		FROM post
+	<select id="select" parameterType="int" resultType="postResponse">
+		SELECT
+		    p.post_id postId,
+		    p.author_id authorId,
+		    m.name authorName,
+		    p.title,
+		    p.content,
+		    p.hit,
+		    p.reg_date regDate,
+		    p.mod_date modDate
+		FROM
+		    post p INNER JOIN member m
+			ON p.author_id = m.member_id
 		WHERE post_id = #{postId}
 	</select>
 
