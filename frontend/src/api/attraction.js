@@ -5,12 +5,10 @@ const local = localAxios();
 
 const url = '/attraction';
 
-function getList(params, success, fail) {
+function getList(param, success, fail) {
     console.log("axios 호출");
     // local.get(`${url}/list`).then(success).catch(fail);
-    local.post(`${url}/list`, params)
-        .then(success)
-        .catch(fail);
+    local.post(`${url}/list`, param).then(success).catch(fail);
 }
 
 // function detailArticle(articleno, success, fail) {
