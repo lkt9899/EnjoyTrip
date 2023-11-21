@@ -20,7 +20,7 @@ const param = ref({
     },
 
     pagingInfo: {
-        "offset": 0,
+        "lastItemId": 0,
         "count": 10
     }
 });
