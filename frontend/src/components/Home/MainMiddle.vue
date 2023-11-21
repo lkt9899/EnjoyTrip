@@ -17,7 +17,7 @@ const requestParams = {
     contentTypeId: 12
   },
   pagingInfo: {
-    offset: 1,
+    lastItemId: 0,
     count: 5  // Adjust as needed
   }
 };
@@ -27,7 +27,7 @@ const getAttractionList = () => {
   console.log("서버에서 itmes 얻어오자!!!");
   const lastItem = items.value[items.value.length - 1];
   const lastContentId = lastItem ? lastItem.contentId : 0;
-  requestParams.pagingInfo.offset = lastContentId;
+  requestParams.pagingInfo.lastItemId = lastContentId;
    
   getList(requestParams,
     ({data}) => {

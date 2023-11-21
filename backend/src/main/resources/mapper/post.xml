@@ -12,9 +12,9 @@
 	</parameterMap>
 
 	<!-- PostResponse -->
-	<resultMap id="postResponse" type="Post">
+	<resultMap id="postResponse" type="postResponse">
 		<id property="postId" column="post_id" />
-		<result property="authorId" column="author_id"/>
+		<result property="authorName" column="author_name"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="hit" column="hit"/>
@@ -40,13 +40,29 @@
 
 	<!--게시글 목록-->
 	<select id="getPostsPerPage" parameterType="pageRequestDto" resultMap="postResponse">
-		SELECT post_id, author_id, title, content, hit
+		SELECT post_id,
+			(   SELECT name
+				FROM member m
+				WHERE author_id = m.member_id
+			)as author_name,
+		    title,
+		    content,
+		    hit
 		FROM post
-		WHERE post_id >= #{offset}
-		ORDER BY post_id
-			LIMIT #{count}
+		<choose>
+			<when test="firstItemId != -1">
+				<![CDATA[
+				WHERE post_id < #{firstItemId}
+			   	]]>
+			</when>
+			<when test="lastItemId != -1">
+				<![CDATA[
+				WHERE post_id > #{lastItemId}
+			   	]]>
+			</when>
+		</choose>
+		LIMIT #{count}
 	</select>
-
 
 	<!-- 게시글 갯수 조회 -->
 	<select id="getTotalPostCount" parameterType="map" resultType="int">
@@ -57,9 +73,24 @@
 <!--		</where>-->
 	</select>
 
+	<!-- 게시글 첫 postId 조회 -->
+	<select id="getFirstPostId" resultType="int">
+		SELECT post_id
+		FROM post
+		limit 1;
+	</select>
+
+	<!-- 게시글 마지막 postId 조회 -->
+	<select id="getLastPostId" resultType="int">
+		SELECT post_id
+		FROM post
+		ORDER BY post_id DESC
+		LIMIT 1
+	</select>
+
 	<!--	게시글 상세 조회-->
 	<select id="select" parameterType="int" resultMap="postResponse">
-		SELECT post_id, author_id, title, content, hit
+		SELECT post_id, author_name, title, content, hit
 		FROM post
 		WHERE post_id = #{postId}
 	</select>

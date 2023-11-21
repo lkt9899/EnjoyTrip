@@ -1,6 +1,7 @@
 package com.ssafy.post.model.service;
 
 import com.ssafy.post.model.dto.Post;
+import com.ssafy.post.model.dto.response.PostResponse;
 import com.ssafy.util.model.dto.request.PageRequestDto;
 import com.ssafy.util.model.dto.response.PageResponseDto;
 import org.junit.jupiter.api.Test;
@@ -20,18 +21,19 @@ class PostServiceTest {
   void selectAll(){
     //given
     PageRequestDto pageRequestDto = new PageRequestDto();
-    pageRequestDto.setCount(5);
-    pageRequestDto.setOffset(7);
-
-    PageResponseDto<Post> result = null;
+    pageRequestDto.setLastItemId(0);
+    PageResponseDto<PostResponse> result = null;
     try {
       result = postService.getPostsPerPage(pageRequestDto);
     } finally {
       //then
       assertNotNull(result);
-      assertEquals(1, result.getList().size());
-      assertEquals(2, result.getCurrentPageNum());
-
+      assertEquals(5, result.getList().size());
+      for (PostResponse p : result.getList()){
+        System.out.println(p);
+      }
+      assertEquals(false, result.isHasPrev());
+      assertEquals(true, result.isHasNext());
     }
 
   }

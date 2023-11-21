@@ -64,7 +64,7 @@
 			latitude,
 			longitude
 		FROM attraction_info
-		WHERE content_id > #{pagingInfo.offset}
+		WHERE content_id > #{pagingInfo.lastItemId}
 		<if test="searchCondition.sidoCode != null">
 			AND sido_code = #{searchCondition.sidoCode}
 		</if>

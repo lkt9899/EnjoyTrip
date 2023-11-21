@@ -10,6 +10,6 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class PagingInfo {
-    private int offset;
-    private int count = 5;
+    private int lastItemId = -1;
+    private final int count = 5;
 }

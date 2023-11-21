@@ -1,6 +1,7 @@
 package com.ssafy.post.controller;
 
 import com.ssafy.post.model.dto.Post;
+import com.ssafy.post.model.dto.response.PostResponse;
 import com.ssafy.post.model.service.PostService;
 import com.ssafy.util.model.dto.request.PageRequestDto;
 import com.ssafy.util.model.dto.response.PageResponseDto;
@@ -26,8 +27,8 @@ public class PostController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<PageResponseDto<Post>> list(@RequestBody PageRequestDto pageRequestDto) {
-        PageResponseDto<Post> response = postService.getPostsPerPage(pageRequestDto);
+    public ResponseEntity<PageResponseDto<PostResponse>> list(@RequestBody PageRequestDto pageRequestDto) {
+        PageResponseDto<PostResponse> response = postService.getPostsPerPage(pageRequestDto);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
