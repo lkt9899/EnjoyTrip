@@ -14,7 +14,7 @@ defineProps({ post: Object });
         {{ post.title }}
       </router-link> -->
     </td>
-    <td>{{ post.authorId }}</td>
+    <td>{{ post.authorName }}</td>
     <td>{{ post.hit }}</td>
   </tr>
 </template>
