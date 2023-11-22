@@ -21,7 +21,7 @@ const param = ref({
 
     pagingInfo: {
         "lastItemId": 0,
-        "count": 10
+        "count": -1
     }
 });
 
@@ -30,7 +30,7 @@ onMounted(() => {
 });
 
 const getContentTypeList = () => {
-    
+
 }
 
 const getSidoList = () => {
