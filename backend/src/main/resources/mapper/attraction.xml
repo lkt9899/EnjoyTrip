@@ -75,7 +75,9 @@
 			AND content_type_id = #{searchCondition.contentTypeId}
 		</if>
 		ORDER BY content_id
-		LIMIT #{pagingInfo.count}
+		<if test="pagingInfo.count != -1" >
+			LIMIT #{pagingInfo.count}
+		</if>
 	</select>
 
 <!--	<select id="getAttractionInfo" resultType="">-->

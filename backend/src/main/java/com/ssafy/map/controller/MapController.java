@@ -34,4 +34,11 @@ public class MapController {
                 .status(HttpStatus.OK)
                 .body(mapService.getGugunInSido(sidoCode));
     }
+
+    @GetMapping("/content")
+    public ResponseEntity<List<LocationCodeDto>> content() {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(mapService.getContentType());
+    }
 }

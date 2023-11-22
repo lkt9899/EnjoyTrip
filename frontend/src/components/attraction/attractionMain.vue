@@ -3,11 +3,12 @@ import { ref, onMounted } from "vue";
 import { getList } from '@/api/attraction';
 import { listSido, listGugun } from "@/api/map";
 
-import VKakaoMap from "../common/VKakaoMap.vue";
-import VSelect from "../common/VSelect.vue";
+import VKakaoMap from "@/components/common/VKakaoMap.vue";
+import VSelect from '@/components/common/VSelect.vue';
 
 const sidoList = ref([]);
 const gugunList = ref([]);
+const contentTypeList = ref([]);
 const attractions = ref([]);
 const selectAttraction = ref({});
 
@@ -19,14 +20,18 @@ const param = ref({
     },
 
     pagingInfo: {
-        "offset": 0,
-        "count": 10
+        "lastItemId": 0,
+        "count": -1
     }
 });
 
 onMounted(() => {
     getSidoList();
 });
+
+const getContentTypeList = () => {
+
+}
 
 const getSidoList = () => {
     listSido(
@@ -87,12 +92,15 @@ const viewAttraction = (attraction) => {
 
 <template>
     <div>
-        <div class="row mb-2">
-            <div class="col d-flex flex-row-reverse">
+        <div class="d-flex flex-row mb-2 justify-content-start">
+            <div class="col-2">
                 <VSelect :selectOption="sidoList" @onKeySelect="onChangeSido" />
             </div>
-            <div class="col">
+            <div class="col-2">
                 <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
+            </div>
+            <div class="col-2">
+                <VSelect :select-option="contentTypeList" @on-key-select="onChangeContentType" />
             </div>
         </div>
         <VKakaoMap :attractions="attractions" :selectAttraction="selectAttraction" />

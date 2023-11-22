@@ -14,4 +14,7 @@ public class LocationCodeDto {
     private String sidoName;
     private String gugunCode;
     private String gugunName;
+    private int contentTypeId;
+    private String contentTypeName;
+
 }

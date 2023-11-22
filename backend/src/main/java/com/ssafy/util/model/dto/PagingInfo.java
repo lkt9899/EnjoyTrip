@@ -11,5 +11,5 @@ import lombok.Setter;
 @NoArgsConstructor
 public class PagingInfo {
     private int lastItemId = -1;
-    private final int count = 5;
+    private int count = 5;
 }

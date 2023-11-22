@@ -16,4 +16,11 @@
 		WHERE sido_code = #{sidoCode}
 		ORDER BY gugun_code
 	</select>
+
+	<select id="getContentType" resultType="LocationCodeDto">
+		SELECT
+		    content_type_id contentTypeId,
+		    content_type_name contentTypeName
+		FROM content_type
+	</select>
 </mapper>

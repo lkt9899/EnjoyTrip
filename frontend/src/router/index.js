@@ -9,19 +9,19 @@ const router = createRouter({
             component: () => import('../views/HomeView.vue'),
         },
         {
-            path: "/register",
+            path: '/register',
             name: 'register',
-            component: () => import("@/views/Register.vue"),
+            component: () => import('@/views/Register.vue'),
         },
         {
-            path: "/login",
+            path: '/login',
             name: 'login',
-            component: () => import("@/views/Login.vue"),
+            component: () => import('@/views/Login.vue'),
         },
         {
-            path: "/board",
+            path: '/board',
             name: 'board',
-            component: () => import("@/views/BoardView.vue"),
+            component: () => import('@/views/BoardView.vue'),
         },
         {
             path: "/board-detail/:postId",
@@ -40,7 +40,7 @@ const router = createRouter({
         },
         
 
-        // 혹시 구조를 바꾸게 될 예비용 주석! 
+        // 혹시 구조를 바꾸게 될 예비용 주석!
         // {
         //     path: "/board",
         //     name: 'board',
@@ -51,7 +51,7 @@ const router = createRouter({
         //             name: 'board-list',
         //             component: () => import('@/views/board/BoardView.vue'),
         //         },
-                
+
         //     ]
         // },
 
@@ -68,6 +68,13 @@ const router = createRouter({
             path: '/notice',
             name: 'notice',
             component: () => import('../views/HomeView.vue'),
+        },
+
+        // plan
+        {
+            path: '/plan',
+            name: 'plan',
+            component: () => import('../views/PlanView.vue'),
         },
     ],
 });
