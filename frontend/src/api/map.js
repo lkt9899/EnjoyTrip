@@ -10,4 +10,8 @@ function listGugun(param, success, fail) {
     local.get(`/map/gugun`, { params: param }).then(success).catch(fail);
 }
 
-export { listSido, listGugun };
+function listContent(success, fail) {
+    local.get(`/map/content`).then(success).catch(fail);
+}
+
+export { listSido, listGugun, listContent };

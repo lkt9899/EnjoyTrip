@@ -9,4 +9,5 @@ import java.util.List;
 public interface MapRepository {
     List<LocationCodeDto> getSido();
     List<LocationCodeDto> getGugunInSido(String sidoCode);
+    List<LocationCodeDto> getContentType();
 }

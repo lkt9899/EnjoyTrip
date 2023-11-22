@@ -23,4 +23,8 @@ public class MapService {
         return mapper.getGugunInSido(sidoCode);
     }
 
+    public List<LocationCodeDto> getContentType() {
+        return mapper.getContentType();
+    }
+
 }
