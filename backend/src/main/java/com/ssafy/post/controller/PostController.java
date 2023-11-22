@@ -35,6 +35,7 @@ public class PostController {
     @GetMapping("/view/{postId}")
     public ResponseEntity<Post> view(@PathVariable("postId") int postId) {
         Post post = postService.select(postId);
+        System.out.println("상세 조회 " + post);
         return ResponseEntity.status(HttpStatus.OK).body(post);
     }
 

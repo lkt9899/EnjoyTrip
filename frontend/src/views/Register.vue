@@ -1,6 +1,10 @@
 <script setup>
 import { ref, nextTick } from 'vue';
 import { registerMember } from "@/api/member";
+import { useRouter } from "vue-router";
+
+
+const router = useRouter();
 
 const form = ref({
   id: '',
@@ -13,13 +17,13 @@ const form = ref({
 });
 const show = ref(true);
 
-const onReset = (event) => {
+const onReset = () => {
   // event.preventDefault();
-  form.email = '';
-  form.name = '';
-  form.age = '';
-  form.phoneNumber= '';
-  form.gender = '';
+  form.value.email = '';
+  form.value.name = '';
+  form.value.age = '';
+  form.value.phoneNumber= '';
+  form.value.gender = '';
   // Trick to reset/clear native browser form validation state
   // show.value = false;
   // nextTick(() => {
@@ -27,7 +31,7 @@ const onReset = (event) => {
   // });
 };
 
-const onSubmit = (event) => {
+const onSubmit = () => {
   // event.preventDefault();
   // alert(JSON.stringify(form));
   callRegisterMember();
@@ -47,7 +51,7 @@ function callRegisterMember() {
 }
 
 function moveMain() {
-  router.push({ name: "main" });
+  router.push({ name: "home" });
 }
 </script>
 

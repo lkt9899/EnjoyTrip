@@ -50,6 +50,7 @@ public class PostService {
 
     @Transactional
     public Post select(int postId) {
+        System.out.println("PostService postId : "+postId);
         if(mapper.existById(postId) == 0)
             throw new PostException(PostErrorCode.NOT_EXIST_POST);
 
@@ -59,6 +60,7 @@ public class PostService {
 
     @Transactional
     public void update(Post post) {
+        System.out.println("PostService postId : "+post);
         if(mapper.existById(post.getPostId()) == 0)
             throw new PostException(PostErrorCode.NOT_EXIST_POST);
 

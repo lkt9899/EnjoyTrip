@@ -20,7 +20,7 @@ import java.util.List;
 public class AttractionController {
 
     private final AttractionService attractionService;
-    @GetMapping("/list")
+    @PostMapping("/list")
     public ResponseEntity<List<Attraction>> list(@RequestBody QueryParams params){
         List<Attraction> list = attractionService.select(params);
         return ResponseEntity.status(HttpStatus.OK).body(list);
