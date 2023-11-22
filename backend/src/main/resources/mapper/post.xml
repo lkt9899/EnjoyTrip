@@ -77,14 +77,14 @@
 	</select>
 
 	<!-- 게시글 첫 postId 조회 -->
-	<select id="getFirstPostId" resultType="int">
+	<select id="getFirstPostId" resultType="java.lang.Integer">
 		SELECT post_id
 		FROM post
 		limit 1;
 	</select>
 
 	<!-- 게시글 마지막 postId 조회 -->
-	<select id="getLastPostId" resultType="int">
+	<select id="getLastPostId" resultType="java.lang.Integer">
 		SELECT post_id
 		FROM post
 		ORDER BY post_id DESC
