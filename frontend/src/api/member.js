@@ -21,6 +21,11 @@ function registerMember(member, success, fail) {
     local.post(`${url}/register`, JSON.stringify(member)).then(success).catch(fail);
 }
 
+function idCheck(param, success, fail) {
+    console.log("member.js >", param);
+    local.post(`${url}/idcheck`, param).then(success).catch(fail);
+}
+
 // function detailArticle(articleno, success, fail) {
 //     local.get(`${url}/${articleno}`).then(success).catch(fail);
 // }
@@ -37,4 +42,4 @@ function registerMember(member, success, fail) {
 //     local.delete(`${url}/${articleno}`).then(success).catch(fail);
 // }
 
-export { registerMember, loginMember };
+export { registerMember, loginMember, idCheck };

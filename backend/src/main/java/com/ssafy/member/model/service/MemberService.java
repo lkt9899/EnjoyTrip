@@ -56,4 +56,10 @@ public class MemberService {
 
         mapper.delete(memberId);
     }
+
+  public Boolean idCheck(String id) {
+      System.out.println(mapper.findById(id));
+        if (mapper.findById(id) == null) return true;
+        else return false;
+  }
 }
