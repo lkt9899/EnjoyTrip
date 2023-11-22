@@ -13,13 +13,13 @@
 
 	<!-- PostResponse -->
 	<resultMap id="postResponse" type="postResponse">
-		<id property="postId" column="post_id" />
+		<id property="postId" column="postId" />
 		<result property="authorId" column="authorId"/>
 		<result property="authorName" column="authorName"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="hit" column="hit"/>
-		<result property="regDate" column="reg_date"/>
+		<result property="regDate" column="regDate"/>
 		<result property="modDate" column="modDate"/>
 	</resultMap>
 
@@ -43,15 +43,18 @@
 
 	<!--게시글 목록-->
 	<select id="getPostsPerPage" parameterType="pageRequestDto" resultMap="postResponse">
-		SELECT post_id,
-			(   SELECT name
-				FROM member m
-				WHERE author_id = m.member_id
-			)as author_name,
-		    title,
-		    content,
-		    hit
-		FROM post
+		SELECT
+			p.post_id postId,
+			p.author_id authorId,
+			m.name authorName,
+			p.title,
+			p.content,
+			p.hit,
+			p.reg_date regDate,
+			p.mod_date modDate
+		FROM
+			post p INNER JOIN member m
+			ON p.author_id = m.member_id
 		<choose>
 			<when test="firstItemId != -1">
 				<![CDATA[
