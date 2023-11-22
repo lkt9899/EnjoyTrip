@@ -4,6 +4,12 @@ CREATE DATABASE IF NOT EXISTS `enjoy_trip`
 
 use enjoy_trip;
 
+-- attraction_info 괄호 파싱
+UPDATE attraction_info
+SET title = REGEXP_REPLACE(title, '\\[.*\\]', '');
+UPDATE attraction_info
+SET title = REGEXP_REPLACE(title, '\\(.*\\)', '');
+
 -- content_type
 CREATE TABLE IF NOT EXISTS `content_type` (
     `content_type_id`   int         not null primary key,
@@ -106,3 +112,14 @@ CREATE TABLE IF NOT EXISTS `LOGIN` (
     `member_id` int not null,
     foreign key (`member_id`) references MEMBER (`member_id`)
 );
+
+--attraction_info trigger 설정
+DELIMITER //
+CREATE TRIGGER clean_title_update
+    BEFORE INSERT ON attraction_info
+    FOR EACH ROW
+BEGIN
+    SET NEW.title = REGEXP_REPLACE(NEW.title, '\\(.*\\)', '');
+    SET NEW.title = REGEXP_REPLACE(NEW.title, '\\[.*\\]', '');
+END;//
+DELIMITER ;
