@@ -1,13 +1,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
 // import { onBeforeRouteUpdate } from 'vue-router'
-// import { useRouter } from "vue-router";
+import { useRouter } from "vue-router";
 import { PostList } from "@/api/board.js";
 // import VSelect from "@/components/common/VSelect.vue";
 import BoardListItem from "@/components/board/item/BoardListItem.vue";
 
 
-// const router = useRouter();
+const router = useRouter();
 
 // const selectOption = ref([
 //   { text: "검색조건", value: "" },
@@ -78,7 +78,7 @@ const goPrevPage = () =>{
 // };
 
 const moveWrite = () => {
-//   router.push({ name: "article-write" });
+  router.push({ name: "board-write" });
 };
 </script>
 

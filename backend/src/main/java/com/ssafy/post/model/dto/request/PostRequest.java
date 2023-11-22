@@ -1,6 +1,5 @@
-package com.ssafy.post.model.dto.data;
+package com.ssafy.post.model.dto.request;
 
-import com.ssafy.member.model.dto.Member;
 import com.ssafy.post.model.dto.Post;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
