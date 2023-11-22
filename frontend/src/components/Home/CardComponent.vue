@@ -5,15 +5,13 @@ defineProps({
 </script>
 
 <template>
-
-
-    <div class="card">
-        <img :src="item.firstImage" alt="image description" />
-        <div class="card-content">
-        <h4>{{item.title}}</h4> 
-        <p>Card Description</p>
-        </div>
+  <div class="card">
+    <img :src="item.firstImage" alt="image description" />
+    <div class="card-content">
+      <h4>{{ item.title }}</h4>
+      <p>Card Description</p>
     </div>
+  </div>
 </template>
 
 <style scoped>
@@ -26,9 +24,11 @@ defineProps({
   padding: 10px;
   margin: 10px;
 }
-.card-content{
+
+.card-content {
   width: 100%;
 }
+
 .card img {
   width: 100%;
   height: auto;
