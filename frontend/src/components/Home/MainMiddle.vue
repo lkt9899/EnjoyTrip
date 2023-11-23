@@ -13,37 +13,6 @@ const isInitCall = ref(true)
 const location = ref(null);
 const locationError = ref(null);
 
-const requestParams = {
-  searchCondition: {
-    sidoCode: 1,
-    gugunCode: 1,
-    contentTypeId: 12
-  },
-  pagingInfo: {
-    lastItemId: 0,
-    count: 5  // Adjust as needed
-  }
-};
-
-
-// const getAttractionList = () => {
-//   console.log("서버에서 itmes 얻어오자!!!");
-//   const lastItem = items.value[items.value.length - 1];
-//   const lastContentId = lastItem ? lastItem.contentId : 0;
-//   requestParams.pagingInfo.lastItemId = lastContentId;
-   
-//   getList(requestParams,
-//     ({data}) => {
-//        console.log(data)
-//       items.value = [...items.value, ...data];
-   
-//    }, 
-//    (error) => {
-//     console.log(error)
-//    });
-// };
-
-
 const loadMoreAttractions = () => {
   // getAttractionList();
   getAttractionListByUser();
