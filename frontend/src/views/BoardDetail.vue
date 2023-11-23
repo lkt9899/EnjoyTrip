@@ -2,6 +2,10 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { detailPost, deletePost } from "@/api/board";
+import { useMemberStore } from "../stores/member";
+
+const memberStore = useMemberStore();
+const { userInfo, isLogin } = memberStore;
 
 const route = useRoute();
 const router = useRouter();
@@ -61,24 +65,22 @@ function onDeletePost() {
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <div class="row my-2">
-          <h2 class="text-secondary px-5">글번호 : {{ post.postId }}. 제목: {{ post.title }}</h2>
-        </div>
         <div class="row">
-          <div class="col-md-8">
-            <div class="clearfix align-content-center">
-              <img
-                class="avatar me-2 float-md-start bg-light p-2"
-                src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg"
-              />
-              <p>
-                
-                <span class="text-secondary fw-light">
-                  {{ post.registerTime }}조회수 : {{ post.hit }}
-                </span>
-              </p>
-            </div>
-          </div>
+          <h2 class="text-secondary">{{ post.title }}</h2>
+        </div>
+        <div class="clearfix align-content-center">
+          <span>
+            {{ post.authorName }}
+            <img class="avatar me-2 float-md-start bg-light p-2"
+              src="https://raw.githubusercontent.com/twbs/icons/main/icons/person-fill.svg" />
+          </span>
+          <q-space />
+          <span class="text-secondary fw-light">
+            {{ post.registerTime }}조회수 : {{ post.hit }}
+          </span>
+        </div>
+        <hr />
+        <div class="row">
           <div class="divider mb-3"></div>
           <div class="text-secondary">
             {{ post.content }}
@@ -88,10 +90,12 @@ function onDeletePost() {
             <button type="button" class="btn btn-outline-primary mb-3" @click="moveList">
               글목록
             </button>
-            <button type="button" class="btn btn-outline-success mb-3 ms-1" @click="moveModify">
+            <button v-show="isLogin && post.authorId == userInfo.memberId" type="button"
+              class="btn btn-outline-success mb-3 ms-1" @click="moveModify">
               글수정
             </button>
-            <button type="button" class="btn btn-outline-danger mb-3 ms-1" @click="onDeletePost">
+            <button v-show="isLogin && post.authorId == userInfo.memberId" type="button"
+              class="btn btn-outline-danger mb-3 ms-1" @click="onDeletePost">
               글삭제
             </button>
           </div>
