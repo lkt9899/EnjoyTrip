@@ -116,10 +116,5 @@
 		<if test="pagingInfo.count != -1" >
 			LIMIT #{pagingInfo.count}
 		</if>
-
 	</select>
-
-<!--	<select id="getAttractionInfo" resultType="">-->
-
-<!--	</select>-->
 </mapper>

@@ -2,9 +2,6 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { getList, getListByUser } from "@/api/attraction";
 
-import CardComponent from './CardComponent.vue';
-import SearchBar from './SearchBar.vue';
-
 const items = ref([]);
 const scrollComponent = ref(null)
 const isInitCall = ref(true)
@@ -12,6 +9,37 @@ const isInitCall = ref(true)
 //사용자 위치 구현
 const location = ref(null);
 const locationError = ref(null);
+
+const requestParams = {
+  searchCondition: {
+    sidoCode: 1,
+    gugunCode: 1,
+    contentTypeId: 12,
+    keyword: ""
+  },
+  pagingInfo: {
+    lastItemId: 0,
+    count: 5  // Adjust as needed
+  }
+};
+
+
+const getAttractionList = () => {
+  console.log("서버에서 itmes 얻어오자!!!");
+  const lastItem = items.value[items.value.length - 1];
+  const lastContentId = lastItem ? lastItem.contentId : 0;
+  requestParams.pagingInfo.lastItemId = lastContentId;
+
+  getList(requestParams,
+    ({ data }) => {
+      console.log(data)
+      items.value = [...items.value, ...data];
+
+    },
+    (error) => {
+      console.log(error)
+    });
+};
 
 const loadMoreAttractions = () => {
   // getAttractionList();
@@ -48,6 +76,12 @@ onMounted(() => {
   } else {
     locationError.value = '브라우저가 Geolocation API를 지원하지 않습니다.';
   }
+
+  // console.log("isInitCall"+isInitCall.value);
+  // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
+  
+  console.log("isInitCall" + isInitCall.value);
+  if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
 
   // console.log("isInitCall"+isInitCall.value);
   // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
@@ -108,12 +142,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-        <card-component 
-        v-for="(item, index) in items"
-         :item = "item"
-         :index = "index"
-         :key="item.contentId">
-        </card-component>
+      <q-card-component v-for="attraction in items" :key="attraction.contentId" :item="attraction" :type="'at'"
+        :alt-img="'images'" />
     </div>
   </div>
 </template>

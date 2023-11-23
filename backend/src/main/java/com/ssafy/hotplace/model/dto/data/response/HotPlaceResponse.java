@@ -8,7 +8,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Getter
 public class HotPlaceResponse extends HotPlace {
-    private String id;
-    private int contentId;
-    private LocalDateTime regDate;
+    private String name;
+    private String aTitle;
+    private int sidoCode;
 }

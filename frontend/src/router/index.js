@@ -25,21 +25,20 @@ const router = createRouter({
             // component: () => import('@/views/BoardView.vue'),
         },
         {
-            path: "/board-detail/:postId",
+            path: '/board-detail/:postId',
             name: 'board-detail',
-            component: () => import("@/views/BoardDetail.vue"),
+            component: () => import('@/views/BoardDetail.vue'),
         },
         {
-            path: "/board-write",
+            path: '/board-write',
             name: 'board-write',
-            component: () => import("@/views/BoardWrite.vue"),
+            component: () => import('@/views/BoardWrite.vue'),
         },
         {
-            path: "/board-modify/:postId",
+            path: '/board-modify/:postId',
             name: 'board-modify',
-            component: () => import("@/views/BoardModify.vue"),
+            component: () => import('@/views/BoardModify.vue'),
         },
-        
 
         // 혹시 구조를 바꾸게 될 예비용 주석!
         // {
@@ -76,6 +75,13 @@ const router = createRouter({
             path: '/plan',
             name: 'plan',
             component: () => import('../views/PlanView.vue'),
+        },
+
+        // hot place
+        {
+            path: '/hotplace',
+            name: 'hotplace',
+            component: () => import('../views/HotPlaceView.vue'),
         },
     ],
 });

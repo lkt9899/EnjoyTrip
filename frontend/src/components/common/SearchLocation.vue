@@ -97,7 +97,7 @@ const onChangeContentType = (val) => {
             <VSelect :select-option="contentTypeList" @on-key-select="onChangeContentType" />
         </div>
         <div class="d-flex col-2 mx-2">
-            <input v-model="param.searchCondition.keyword" type="text" class="w-100">
+            <input v-model="param.searchCondition.keyword" type="text" placeholder="키워드 검색" class="w-100">
         </div>
         <div class="col-2 mx-2">
             <q-btn flat :icon="'search'" @click="$emit('updateAttraction', param)"></q-btn>
