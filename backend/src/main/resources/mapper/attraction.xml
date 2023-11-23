@@ -33,15 +33,18 @@
 		   	longitude,
 		FROM attraction_info
 		WHERE 1=1
-		    <if test="sidoCode != null">
-				AND sido_code = #{sidoCode}
-			</if>
-			<if test="gugunCode != null">
-				AND gugun_code = #{gugunCode}
-			</if>
-			<if test="contentTypeId != null">
-				AND content_type_id = #{contentTypeId}
-			</if>
+		<if test="searchCondition.sidoCode != ''">
+			AND sido_code = #{searchCondition.sidoCode}
+		</if>
+		<if test="searchCondition.gugunCode != ''">
+			AND gugun_code = #{searchCondition.gugunCode}
+		</if>
+		<if test="searchCondition.contentTypeId != ''">
+			AND content_type_id = #{searchCondition.contentTypeId}
+		</if>
+		<if test="searchCondition.keyword != ''">
+			AND title LIKE CONCAT('%', #{searchCondition.keyword}, '%')
+		</if>
 	</select>
 	
 	<select id="getCountOfAttraction" resultType="int">
@@ -65,22 +68,21 @@
 			longitude
 		FROM attraction_info
 		WHERE content_id > #{pagingInfo.lastItemId}
-		<if test="searchCondition.sidoCode != null">
+		<if test="searchCondition.sidoCode != ''">
 			AND sido_code = #{searchCondition.sidoCode}
 		</if>
-		<if test="searchCondition.gugunCode != null">
+		<if test="searchCondition.gugunCode != ''">
 			AND gugun_code = #{searchCondition.gugunCode}
 		</if>
-		<if test="searchCondition.contentTypeId != null">
+		<if test="searchCondition.contentTypeId != ''">
 			AND content_type_id = #{searchCondition.contentTypeId}
+		</if>
+		<if test="searchCondition.keyword != ''">
+			AND title LIKE CONCAT('%', #{searchCondition.keyword}, '%')
 		</if>
 		ORDER BY content_id
 		<if test="pagingInfo.count != -1" >
 			LIMIT #{pagingInfo.count}
 		</if>
 	</select>
-
-<!--	<select id="getAttractionInfo" resultType="">-->
-
-<!--	</select>-->
 </mapper>
