@@ -1,13 +1,13 @@
 <script setup>
-import { ref, nextTick } from 'vue';
+import { ref } from 'vue';
 import { registerMember } from "@/api/member";
 
 const form = ref({
   id: '',
-  password:'',
+  password: '',
   name: '',
   age: '',
-  phoneNumber:'',
+  phoneNumber: '',
   //food: null,
   gender: '', // 성별
 });
@@ -18,7 +18,7 @@ const onReset = (event) => {
   form.email = '';
   form.name = '';
   form.age = '';
-  form.phoneNumber= '';
+  form.phoneNumber = '';
   form.gender = '';
   // Trick to reset/clear native browser form validation state
   // show.value = false;
@@ -53,36 +53,14 @@ function moveMain() {
 
 <template>
   <p> 나오나?</p>
-  <BForm @submit="onSubmit" @reset="onReset" v-if="show" method = "post">
+  <BForm @submit="onSubmit" @reset="onReset" v-if="show" method="post">
     <!--이름-->
-    <BFormGroup
-      id="input-group-1"
-      label="이름:"
-      label-for="register-name"
-    >
-      <BFormInput
-        id="register-name"
-        name = "name"
-        v-model="form.name"
-        type="text"
-        placeholder="이름을 입력하세요."
-        required
-      />
+    <BFormGroup id="input-group-1" label="이름:" label-for="register-name">
+      <BFormInput id="register-name" name="name" v-model="form.name" type="text" placeholder="이름을 입력하세요." required />
     </BFormGroup>
     <!--나이 -->
-    <BFormGroup
-      id="input-group-1"
-      label="나이:"
-      label-for="register-age"
-    >
-      <BFormInput
-        id="register-age"
-        name ="age"
-        v-model="form.age"
-        type="text"
-        placeholder="숫자를 입력하세요."
-        required
-      />
+    <BFormGroup id="input-group-1" label="나이:" label-for="register-age">
+      <BFormInput id="register-age" name="age" v-model="form.age" type="text" placeholder="숫자를 입력하세요." required />
     </BFormGroup>
     <!--성별-->
     <BFormGroup id="input-group-4" label="성별을 선택하세요.">
@@ -92,75 +70,37 @@ function moveMain() {
       </BFormRadioGroup>
     </BFormGroup>
     <!--전화번호-->
-    <BFormGroup
-      id="input-group-1"
-      label="전화번호:"
-      label-for="register-phoneNumber"
-    >
-      <BFormInput
-        id="register-phoneNumber"
-        name ="phoneNumber"
-        v-model="form.phoneNumber"
-        type="text"
-        placeholder="-를 포함하지 않도록 입력해주세요 ex)01011112222"
-        required
-      />
+    <BFormGroup id="input-group-1" label="전화번호:" label-for="register-phoneNumber">
+      <BFormInput id="register-phoneNumber" name="phoneNumber" v-model="form.phoneNumber" type="text"
+        placeholder="-를 포함하지 않도록 입력해주세요 ex)01011112222" required />
     </BFormGroup>
 
     <!--아이디-->
-    <BFormGroup
-      id="input-group-1"
-      label="아이디:"
-      label-for="register-id"
-    >
-      <BFormInput
-        id="register-id"
-        name = "id"
-        v-model="form.id"
-        type="text"
-        placeholder="아이디를 입력하세요."
-        required
-      />
+    <BFormGroup id="input-group-1" label="아이디:" label-for="register-id">
+      <BFormInput id="register-id" name="id" v-model="form.id" type="text" placeholder="아이디를 입력하세요." required />
     </BFormGroup>
 
     <!--비밀번호-->
-    <BFormGroup 
-      id="input-group-2"
-      label="비밀번호:" 
-      label-for="register-password">
-      <BFormInput 
-        id="register-password" 
-        name = "password"
-        v-model="form.password" 
-        placeholder="비밀번호를 입력하세요." 
-        required />
+    <BFormGroup id="input-group-2" label="비밀번호:" label-for="register-password">
+      <BFormInput id="register-password" name="password" v-model="form.password" placeholder="비밀번호를 입력하세요." required />
     </BFormGroup>
 
-    <BFormGroup 
-      id="input-group-2"
-      label="비밀번호 확인:" 
-      label-for="register-password-check">
-      <BFormInput 
-        id="register-password-check" 
-        v-model="form.passwordCheck" 
-        placeholder="비밀번호를 다시 입력하세요." 
-        required />
+    <BFormGroup id="input-group-2" label="비밀번호 확인:" label-for="register-password-check">
+      <BFormInput id="register-password-check" v-model="form.passwordCheck" placeholder="비밀번호를 다시 입력하세요." required />
     </BFormGroup>
 
-      <!--<BFormGroup 
+    <!--<BFormGroup 
         id="input-group-3"
         label="Food:" 
         label-for="input-3">
         <BFormSelect id="input-3" v-model="form.food" :options="foods" required />
       </BFormGroup>-->
 
-    
+
     <BButton type="submit" variant="primary">Submit</BButton>
     <BButton type="reset" variant="danger">Reset</BButton>
   </BForm>
 </template>
   
-<style scoped>
-
-</style>
+<style scoped></style>
 

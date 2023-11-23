@@ -79,7 +79,7 @@ onMounted(() => {
 
   // console.log("isInitCall"+isInitCall.value);
   // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
-  
+
   console.log("isInitCall" + isInitCall.value);
   if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
 
@@ -90,12 +90,12 @@ onMounted(() => {
 });
 
 const handleSuccess = (position) => {
-    location.value = {
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-    };
-    //여기서 서버에서 attractionList 가져오기
-    getAttractionListByUser();
+  location.value = {
+    latitude: position.coords.latitude,
+    longitude: position.coords.longitude,
+  };
+  //여기서 서버에서 attractionList 가져오기
+  getAttractionListByUser();
 };
 
 const handleError = (error) => {
@@ -103,27 +103,27 @@ const handleError = (error) => {
 };
 
 const getAttractionListByUser = () => {
-    console.log("서버에서 getAttractionListByUser 얻어오자!!!");
-    const requestParams = {
-        lat: location.value.latitude,
-        lng : location.value.longitude,
-        pagingInfo: {
-            lastItemId: 0,
-            count: 5  // Adjust as needed
-        }
-    };
+  console.log("서버에서 getAttractionListByUser 얻어오자!!!");
+  const requestParams = {
+    lat: location.value.latitude,
+    lng: location.value.longitude,
+    pagingInfo: {
+      lastItemId: 0,
+      count: 5  // Adjust as needed
+    }
+  };
   const lastItem = items.value[items.value.length - 1];
   const lastContentId = lastItem ? lastItem.contentId : 0;
   requestParams.pagingInfo.lastItemId = lastContentId;
-   
-    getListByUser(requestParams,
-        ({ data }) => {
-            console.log("success!!!!!!!!!!")
-          console.log(data);
-          items.value = [...items.value, ...data];
-    }, 
+
+  getListByUser(requestParams,
+    ({ data }) => {
+      console.log("success!!!!!!!!!!")
+      console.log(data);
+      items.value = [...items.value, ...data];
+    },
     (error) => {
-        console.log(error)
+      console.log(error)
     });
 };
 
@@ -142,8 +142,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-      <q-card-component v-for="attraction in items" :key="attraction.contentId" :item="attraction" :type="'at'"
-        :alt-img="'images'" />
+      <q-card-component v-for="attraction in  items " :key="attraction.contentId" :item="attraction" :type="'at'"
+        :width="'250px'" />
     </div>
   </div>
 </template>

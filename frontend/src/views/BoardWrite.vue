@@ -11,7 +11,7 @@ import BoardFormItem from "@/components/board/item/BoardFormItem.vue";
         </h2>
       </div>
       <div class="col-lg-10 text-start">
-        <BoardFormItem type="regist" />
+        <board-form-item type="regist" />
       </div>
     </div>
   </div>

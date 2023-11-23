@@ -41,6 +41,8 @@ watch(
       let obj = {};
       obj.latlng = new kakao.maps.LatLng(attraction.latitude, attraction.longitude);
       obj.title = attraction.title;
+      obj.addr = attraction.addr1;
+      obj.img = attraction.firstImage;
 
       positions.value.push(obj);
     });
@@ -83,9 +85,23 @@ const loadMarkers = () => {
       clickable: false, // // 마커를 클릭했을 때 지도의 클릭 이벤트가 발생하지 않도록 설정합니다
       image: markerImage, // 마커의 이미지
     });
-    
+
     var infoWindow = new kakao.maps.InfoWindow({
-      content: position.title
+      content: '<div class="wrap">' +
+        '    <div class="info">' +
+        '        <div class="title">' +
+        `            ${position.title}` +
+        '        </div>' +
+        '        <div class="body">' +
+        '            <div class="img">' +
+        `                <img src="${position.img}" width="73" height="70">` +
+        '           </div>' +
+        '            <div class="desc">' +
+        `                <div class="ellipsis">${position.addr}</div>` +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
+        '</div>'
     });
 
     (function (marker, infoWindow) {
@@ -126,5 +142,83 @@ const deleteMarkers = () => {
 #map {
   width: 100%;
   height: 700px;
+}
+
+.wrap * {
+  padding: 0;
+  margin: 0;
+}
+
+.wrap .info {
+  width: 286px;
+  height: 120px;
+  border-radius: 5px;
+  border-bottom: 2px solid #ccc;
+  border-right: 1px solid #ccc;
+  overflow: hidden;
+  background: #fff;
+}
+
+.wrap .info:nth-child(1) {
+  border: 0;
+  box-shadow: 0px 1px 2px #888;
+}
+
+.info .title {
+  padding: 5px 0 0 10px;
+  height: 30px;
+  background: #eee;
+  border-bottom: 1px solid #ddd;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.info .close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #888;
+  width: 17px;
+  height: 17px;
+  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/overlay_close.png');
+}
+
+.info .body {
+  position: relative;
+  overflow: hidden;
+}
+
+.info .desc {
+  position: relative;
+  margin: 13px 0 0 90px;
+  height: 75px;
+}
+
+.desc .ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info .img {
+  position: absolute;
+  top: 6px;
+  left: 5px;
+  width: 73px;
+  height: 71px;
+  border: 1px solid #ddd;
+  color: #888;
+  overflow: hidden;
+}
+
+.info:after {
+  content: '';
+  position: absolute;
+  margin-left: -12px;
+  left: 50%;
+  bottom: 0;
+  width: 22px;
+  height: 12px;
+  background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/vertex_white.png')
 }
 </style>

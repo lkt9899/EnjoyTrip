@@ -5,7 +5,7 @@ import { statistics } from '@/api/util.js'
 const datas = ref([]);
 
 onMounted(() => {
-  getStatistics();
+    getStatistics();
 });
 
 const getStatistics = () => {
@@ -24,7 +24,6 @@ const getStatistics = () => {
 </script>
 
 <template>
-    
     <div class="container justify-content-center">
         <div class="m-5">
             <h1 class="text-center">ENJOY TRIP</h1>
