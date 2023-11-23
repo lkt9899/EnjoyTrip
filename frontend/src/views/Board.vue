@@ -2,8 +2,6 @@
 <script setup>
 import { ref } from 'vue'
 import BoardList from '../components/board/BoardList.vue';
-import BoardIntroduce from '@/components/board/item/BoardIntroduce.vue';
-import BoardIntroduceTitle from '@/components/board/item/BoardIntroduceTitle.vue';
 
 const leftDrawerOpen = ref(false)
 
@@ -15,8 +13,6 @@ const toggleLeftDrawer = () =>  {
 
 <template>
     <div>
-        <!-- <BoardIntroduceTitle></BoardIntroduceTitle>
-        <BoardIntroduce></BoardIntroduce> -->
         
         <div class="q-pa-md">
             <q-parallax :height="200" :speed="0.5">
