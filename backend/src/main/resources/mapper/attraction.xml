@@ -85,4 +85,36 @@
 			LIMIT #{pagingInfo.count}
 		</if>
 	</select>
+
+	<!--게시글 목록 : 사용자 좌표 기반 -->
+	<select id="getAttractionPerPageByUser" parameterType="mainQueryParams" resultMap="attractionResponse">
+
+		SELECT
+			content_id,
+			content_type_id,
+			title,
+			addr1,
+			zipcode,
+			tel,
+			first_image,
+			sido_code,
+			gugun_code,
+			latitude,
+			longitude
+		FROM attraction_info
+		WHERE content_id > #{pagingInfo.lastItemId}
+			<if test="lng!=null and lat!=null">
+				<![CDATA[
+					AND ST_DISTANCE_SPHERE(
+					POINT(longitude, latitude),
+					POINT( #{lng}, #{lat})
+					) <= 1000
+
+				]]>
+			</if>
+		ORDER BY content_id
+		<if test="pagingInfo.count != -1" >
+			LIMIT #{pagingInfo.count}
+		</if>
+	</select>
 </mapper>

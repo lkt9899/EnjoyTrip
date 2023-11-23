@@ -3,6 +3,7 @@ package com.ssafy.attraction.controller;
 import com.ssafy.attraction.model.dto.Attraction;
 import com.ssafy.attraction.model.service.AttractionService;
 import com.ssafy.util.model.dto.QueryParams;
+import com.ssafy.util.model.dto.request.MainQueryParams;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,11 @@ public class AttractionController {
     @PostMapping("/list")
     public ResponseEntity<List<Attraction>> list(@RequestBody QueryParams params){
         List<Attraction> list = attractionService.select(params);
+        return ResponseEntity.status(HttpStatus.OK).body(list);
+    }
+    @PostMapping("/mainList")
+    public ResponseEntity<List<Attraction>> getAttractionPerPageByUser(@RequestBody MainQueryParams params){
+        List<Attraction> list = attractionService.getAttractionPerPageByUser(params);
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
 
