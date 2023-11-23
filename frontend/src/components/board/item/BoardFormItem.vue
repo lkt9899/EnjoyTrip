@@ -13,11 +13,11 @@ const isUseId = ref(false);
 const post = ref({
   regDate: "",
   modDate: "",
-  postId: 0,
-  authorId: 0,
+  postId: "",
+  authorId: "",
   title: "",
   content: "",
-  hit: 0
+  hit: ""
 });
 
 if (props.type === "modify") {
@@ -26,7 +26,7 @@ if (props.type === "modify") {
   getUpdatePost(
     postId,
     ({ data }) => {
-      console.log("수정할 정보 조회 data : "+ data)
+      console.log("수정할 정보 조회 data : " + data)
       post.value = data;
       isUseId.value = true;
     },
@@ -111,25 +111,18 @@ function moveList() {
   <form @submit.prevent="onSubmit">
     <div class="mb-3">
       <label for="userid" class="form-label">작성자 ID : </label>
-      <input
-        type="text"
-        class="form-control"
-        name = "authorId"
-        v-model="post.authorId"
-        :disabled="isUseId"
-        placeholder="작성자ID..."
-      />
+      <input type="text" class="form-control" name="authorId" v-model="post.authorId" :disabled="isUseId"
+        placeholder="작성자ID..." />
     </div>
     <div class="mb-3">
-      <label for="subject" class="form-label" >제목 : </label>
-      <input type="text" class="form-control" name = "title" v-model="post.title" placeholder="제목..." />
+      <label for="subject" class="form-label">제목 : </label>
+      <input type="text" class="form-control" name="title" v-model="post.title" placeholder="제목..." />
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">내용 : </label>
-      <textarea class="form-control" name = "content" v-model="post.content" rows="10"></textarea>
+      <textarea class="form-control" name="content" v-model="post.content" rows="10"></textarea>
     </div>
     <div class="col-auto text-center">
-      <p> {{ post }}</p>
       <button type="submit" class="btn btn-outline-primary mb-3" v-if="type === 'regist'">
         글작성
       </button>
