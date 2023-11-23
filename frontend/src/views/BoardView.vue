@@ -1,17 +1,27 @@
 <script setup>
-import BoardList from '../components/board/BoardList.vue';
+import { ref } from 'vue'
+
+const leftDrawerOpen = ref(false)
+
+const toggleLeftDrawer = () => {
+    leftDrawerOpen.value = !leftDrawerOpen.value
+}
+
 </script>
 
 <template>
-  <div class="container text-center mt-3">
-    <div class="alert alert-info" role="alert">자유롭게 글쓰는 공간이당</div>
-    <BoardList></BoardList>
-  </div>
-  
-</template>
+    <div>
 
-<style>
-mark.sky {
-  background: linear-gradient(to top, #54fff9 20%, transparent 30%);
-}
-</style>
+        <div class="container q-pa-md">
+            <q-parallax :height="200" :speed="0.5">
+                <template v-slot:media>
+                    <img src="https://cdn.quasar.dev/img/parallax1.jpg">
+                </template>
+
+                <h4 class="text-white">자유게시판에서 다른 사용자들과 기록물을 공유해보세요.</h4>
+            </q-parallax>
+        </div>
+        <board-list></board-list>
+
+    </div>
+</template>
