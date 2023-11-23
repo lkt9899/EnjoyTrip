@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
+import java.util.List;
 
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -30,5 +31,9 @@ public class HotPlaceService {
     public HotPlaceResponse select(int hotPlaceId) throws SQLException {
         mapper.updateHit(hotPlaceId);
         return mapper.select(hotPlaceId);
+    }
+
+    public List<HotPlaceResponse> listBySido(int sidoCode) {
+        return mapper.listBySido(sidoCode);
     }
 }
