@@ -3,7 +3,6 @@ import { ref } from 'vue';
 import { getList } from '@/api/attraction';
 
 import VKakaoMap from "@/components/common/VKakaoMap.vue";
-import QCardComponent from "../components/common/QCardComponent.vue";
 
 const drawer = ref(false);
 
@@ -55,7 +54,7 @@ const viewAttraction = (attraction) => {
                 <q-list>
                     <template v-for="attraction in attractions" :key="attraction.contentId">
                         <q-item @click="viewAttraction(attraction)" clickable v-ripple>
-                            <QCardComponent :item="attraction" />
+                            <q-card-component :item="attraction" :type="'at'" />
                         </q-item>
                     </template>
                 </q-list>

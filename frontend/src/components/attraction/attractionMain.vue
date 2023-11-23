@@ -1,8 +1,6 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref } from "vue";
 import { getList } from '@/api/attraction';
-
-import VKakaoMap from "@/components/common/VKakaoMap.vue";
 
 const drawer = ref(false);
 const attractions = ref([]);
@@ -52,7 +50,7 @@ const viewAttraction = (attraction) => {
                 <q-list>
                     <template v-for="attraction in attractions" :key="attraction.contentId">
                         <q-item @click="viewAttraction(attraction)" clickable v-ripple>
-                            <QCardComponent :item="attraction" />
+                            <q-card-component :item="attraction" :type="'at'" />
                         </q-item>
                     </template>
                 </q-list>
@@ -62,7 +60,7 @@ const viewAttraction = (attraction) => {
         <q-page-container>
             <q-page padding>
                 <search-location @updateAttraction="setAttraction" />
-                <VKakaoMap :attractions="attractions" :selectAttraction="selectAttraction" />
+                <v-kakao-map :attractions="attractions" :selectAttraction="selectAttraction" />
             </q-page>
         </q-page-container>
     </q-layout>

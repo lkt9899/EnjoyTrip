@@ -140,7 +140,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-      <QCardComponent v-for="attraction in items" :key="attraction.contentId" :item="attraction" :alt-img="'images'" />
+      <q-card-component v-for="attraction in items" :key="attraction.contentId" :item="attraction" :type="'at'"
+        :alt-img="'images'" />
     </div>
   </div>
 </template>

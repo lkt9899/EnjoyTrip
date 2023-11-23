@@ -8,7 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.xml.ws.Response;
 import java.sql.SQLException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/hotplace")
@@ -51,5 +53,8 @@ public class HotPlaceController {
         }
     }
 
-    // TODO: HotPlace List by Pagination
+    @GetMapping("/list/{sidoCode}")
+    public ResponseEntity<List<HotPlaceResponse>> list(@PathVariable int sidoCode) {
+        return ResponseEntity.status(HttpStatus.OK).body(hotPlaceService.listBySido(sidoCode));
+    }
 }
