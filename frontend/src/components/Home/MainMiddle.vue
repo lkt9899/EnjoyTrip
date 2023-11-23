@@ -1,10 +1,15 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from "vue";
-import { getList } from "@/api/attraction";
+import { getList, getListByUser } from "@/api/attraction";
 
 const items = ref([]);
 const scrollComponent = ref(null)
 const isInitCall = ref(true)
+
+
+//사용자 위치 구현
+const location = ref(null);
+const locationError = ref(null);
 
 const requestParams = {
   searchCondition: {
@@ -37,9 +42,9 @@ const getAttractionList = () => {
     });
 };
 
-
 const loadMoreAttractions = () => {
-  getAttractionList();
+  // getAttractionList();
+  getAttractionListByUser();
 }
 
 const debounce = (func, delay) => {
@@ -67,11 +72,58 @@ const handleScroll = debounce(() => {
 }, 200);
 
 onMounted(() => {
+  if ('geolocation' in navigator) {
+    navigator.geolocation.getCurrentPosition(handleSuccess, handleError);
+  } else {
+    locationError.value = '브라우저가 Geolocation API를 지원하지 않습니다.';
+  }
+
+  // console.log("isInitCall"+isInitCall.value);
+  // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
+  
   console.log("isInitCall" + isInitCall.value);
   if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
 
   window.addEventListener("scroll", handleScroll)
 });
+
+const handleSuccess = (position) => {
+    location.value = {
+        latitude: position.coords.latitude,
+        longitude: position.coords.longitude,
+    };
+    //여기서 서버에서 attractionList 가져오기
+    getAttractionListByUser();
+};
+
+const handleError = (error) => {
+  locationError.value = `위치 정보를 받아오는데 실패했습니다. 오류 메시지: ${error.message}`;
+};
+
+const getAttractionListByUser = () => {
+    console.log("서버에서 getAttractionListByUser 얻어오자!!!");
+    const requestParams = {
+        lat: location.value.latitude,
+        lng : location.value.longitude,
+        pagingInfo: {
+            lastItemId: 0,
+            count: 5  // Adjust as needed
+        }
+    };
+  const lastItem = items.value[items.value.length - 1];
+  const lastContentId = lastItem ? lastItem.contentId : 0;
+  requestParams.pagingInfo.lastItemId = lastContentId;
+   
+    getListByUser(requestParams,
+        ({ data }) => {
+            console.log("success!!!!!!!!!!")
+          console.log(data);
+          items.value = [...items.value, ...data];
+    }, 
+    (error) => {
+        console.log(error)
+    });
+};
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll)

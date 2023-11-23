@@ -12,7 +12,7 @@ const getStatistics = () => {
     console.log("서버에 통계값 요청");
     statistics(
         ({ data }) => {
-            console.log(data)
+            // console.log(data)
             datas.value = data;
         },
         (error) => {
