@@ -27,6 +27,7 @@ const param = ref({
 const setAttraction = (data) => {
     param.value = data;
     getAttractions();
+    drawer.value = true;
 }
 
 const getAttractions = () => {
@@ -48,7 +49,7 @@ const viewAttraction = (attraction) => {
 
 <template>
     <q-layout view="hHh Lpr lff" container style="height: 730px" class="shadow-2 rounded-borders">
-        <q-drawer v-model="drawer" show-if-above :width="200" :breakpoint="500" bordered
+        <q-drawer v-model="drawer" :width="200" :breakpoint="500" bordered
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
             <q-scroll-area class="fit">
                 <q-list>
