@@ -6,7 +6,6 @@ const items = ref([]);
 const scrollComponent = ref(null)
 const isInitCall = ref(true)
 
-
 //사용자 위치 구현
 const location = ref(null);
 const locationError = ref(null);
@@ -84,6 +83,9 @@ onMounted(() => {
   console.log("isInitCall" + isInitCall.value);
   if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
 
+  // console.log("isInitCall"+isInitCall.value);
+  // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
+  
   window.addEventListener("scroll", handleScroll)
 });
 
@@ -133,7 +135,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="container">
+ <div class="container">
     <div class="row">
       <div class="searchbar">
         <search-bar></search-bar>
@@ -161,16 +163,14 @@ onUnmounted(() => {
   /* justify-content: space-around; */
 }
 
-.searchbar,
-.card {
+.searchbar, .card {
   margin: 5px;
-
+  
 }
 
-.card {
-  flex: 1 0 21%;
-  flex-basis: 21%;
-  /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
-  max-width: 240px;
+.card{
+    flex: 1 0 21%;
+    flex-basis: 21%; /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
+    max-width: 240px;
 }
 </style>
