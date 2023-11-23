@@ -1,8 +1,19 @@
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
     items: Array,
     isPlan: Boolean
 });
+
+const planDetailList = computed(() => {
+    let options = [];
+    props.items.forEach((item) => {
+        options.push({ contentId: item.contentId });
+    });
+    return options;
+});
+
 </script>
 
 <template>
@@ -16,6 +27,8 @@ defineProps({
         </q-list>
 
         <q-list v-else>
+            <q-plan-form :planList="planDetailList" />
+            <hr />
             <template v-for="(item, idx) in items" :key="item.contentId">
                 <q-item clickable v-ripple>
                     <div class="row">
