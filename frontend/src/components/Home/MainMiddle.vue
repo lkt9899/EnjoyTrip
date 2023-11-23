@@ -2,9 +2,8 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { getList } from "@/api/attraction";
 
-import CardComponent from './CardComponent.vue';
 import SearchBar from './SearchBar.vue';
-
+import QCardComponent from "../common/QCardComponent.vue";
 
 const items = ref([]);
 const scrollComponent = ref(null)
@@ -28,16 +27,16 @@ const getAttractionList = () => {
   const lastItem = items.value[items.value.length - 1];
   const lastContentId = lastItem ? lastItem.contentId : 0;
   requestParams.pagingInfo.lastItemId = lastContentId;
-   
+
   getList(requestParams,
-    ({data}) => {
-       console.log(data)
+    ({ data }) => {
+      console.log(data)
       items.value = [...items.value, ...data];
-   
-   }, 
-   (error) => {
-    console.log(error)
-   });
+
+    },
+    (error) => {
+      console.log(error)
+    });
 };
 
 
@@ -70,9 +69,9 @@ const handleScroll = debounce(() => {
 }, 200);
 
 onMounted(() => {
-  console.log("isInitCall"+isInitCall.value);
+  console.log("isInitCall" + isInitCall.value);
   if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
-  
+
   window.addEventListener("scroll", handleScroll)
 });
 
@@ -84,19 +83,14 @@ onUnmounted(() => {
 </script>
 
 <template>
- <div class="container">
+  <div class="container">
     <div class="row">
       <div class="searchbar">
         <search-bar></search-bar>
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-        <card-component 
-        v-for="(item, index) in items"
-         :item = "item"
-         :index = "index"
-         :key="item.contentId">
-        </card-component>
+      <QCardComponent v-for="attraction in items" :key="attraction.contentId" :item="attraction" :alt-img="'images'" />
     </div>
   </div>
 </template>
@@ -116,14 +110,16 @@ onUnmounted(() => {
   /* justify-content: space-around; */
 }
 
-.searchbar, .card {
+.searchbar,
+.card {
   margin: 5px;
-  
+
 }
 
-.card{
-    flex: 1 0 21%;
-    flex-basis: 21%; /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
-    max-width: 240px;
+.card {
+  flex: 1 0 21%;
+  flex-basis: 21%;
+  /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
+  max-width: 240px;
 }
 </style>
