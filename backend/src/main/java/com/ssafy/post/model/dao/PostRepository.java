@@ -24,7 +24,7 @@ public interface PostRepository {
     // 게시글 삭제
     void delete(int postId);
 
-    int getLastPostId();
+    Integer getLastPostId();
 
-    int getFirstPostId();
+    Integer getFirstPostId();
 }

@@ -38,10 +38,11 @@ const isLogin = ref(false);
 
         <ul v-if="!isLogin" class="navbar-nav ms-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <button class="nav-link">회원 가입</button>
+            <router-link to="/register" class="nav-link">회원 가입</router-link>
           </li>
           <li class="nav-item">
-            <button class="nav-link" @click="isLogin = !isLogin">로그인</button>
+            <!-- <button class="nav-link" @click="isLogin = !isLogin">로그인</button> -->
+            <router-link to="/login" class="nav-link">로그인</router-link>
           </li>
         </ul>
 

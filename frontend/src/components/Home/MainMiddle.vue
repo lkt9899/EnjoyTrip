@@ -2,16 +2,45 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { getList, getListByUser } from "@/api/attraction";
 
-import CardComponent from './CardComponent.vue';
-import SearchBar from './SearchBar.vue';
-
 const items = ref([]);
 const scrollComponent = ref(null)
 const isInitCall = ref(true)
 
+
 //사용자 위치 구현
 const location = ref(null);
 const locationError = ref(null);
+
+const requestParams = {
+  searchCondition: {
+    sidoCode: 1,
+    gugunCode: 1,
+    contentTypeId: 12,
+    keyword: ""
+  },
+  pagingInfo: {
+    lastItemId: 0,
+    count: 5  // Adjust as needed
+  }
+};
+
+
+const getAttractionList = () => {
+  console.log("서버에서 itmes 얻어오자!!!");
+  const lastItem = items.value[items.value.length - 1];
+  const lastContentId = lastItem ? lastItem.contentId : 0;
+  requestParams.pagingInfo.lastItemId = lastContentId;
+
+  getList(requestParams,
+    ({ data }) => {
+      console.log(data)
+      items.value = [...items.value, ...data];
+
+    },
+    (error) => {
+      console.log(error)
+    });
+};
 
 const loadMoreAttractions = () => {
   // getAttractionList();
@@ -52,6 +81,9 @@ onMounted(() => {
   // console.log("isInitCall"+isInitCall.value);
   // if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
   
+  console.log("isInitCall" + isInitCall.value);
+  if (isInitCall.value) getAttractionList(); // params 정보로 attrationList를 가져온다.
+
   window.addEventListener("scroll", handleScroll)
 });
 
@@ -101,19 +133,14 @@ onUnmounted(() => {
 </script>
 
 <template>
- <div class="container">
+  <div class="container">
     <div class="row">
       <div class="searchbar">
         <search-bar></search-bar>
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-        <card-component 
-        v-for="(item, index) in items"
-         :item = "item"
-         :index = "index"
-         :key="item.contentId">
-        </card-component>
+      <QCardComponent v-for="attraction in items" :key="attraction.contentId" :item="attraction" :alt-img="'images'" />
     </div>
   </div>
 </template>
@@ -133,14 +160,16 @@ onUnmounted(() => {
   /* justify-content: space-around; */
 }
 
-.searchbar, .card {
+.searchbar,
+.card {
   margin: 5px;
-  
+
 }
 
-.card{
-    flex: 1 0 21%;
-    flex-basis: 21%; /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
-    max-width: 240px;
+.card {
+  flex: 1 0 21%;
+  flex-basis: 21%;
+  /* 카드의 기본 너비를 설정하여 사이즈가 일정하게 보이도록 설정 */
+  max-width: 240px;
 }
 </style>
