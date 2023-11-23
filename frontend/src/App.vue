@@ -5,11 +5,11 @@ import MyFooter from "@/components/layout/MyFooter.vue";
 </script>
 
 <template>
-  <div class="container">
+  <!-- <div class="container"> -->
     <NavBar />
     <RouterView />
     <MyFooter />
-  </div>
+  <!-- </div> -->
 </template>
 
 <style scoped></style>

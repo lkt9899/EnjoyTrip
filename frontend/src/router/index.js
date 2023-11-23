@@ -21,7 +21,8 @@ const router = createRouter({
         {
             path: '/board',
             name: 'board',
-            component: () => import('@/views/BoardView.vue'),
+            component: () => import('@/views/Board.vue'),
+            // component: () => import('@/views/BoardView.vue'),
         },
         {
             path: "/board-detail/:postId",
