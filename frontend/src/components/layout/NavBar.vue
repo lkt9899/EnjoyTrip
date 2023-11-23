@@ -6,7 +6,7 @@ const isLogin = ref(false);
 
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container shadow-sm">
+    <div class="container-fluid px-0 shadow-sm">
       <router-link to="/" class="navbar-brand px-2" id="jmt-logo">
         <img src="@/assets/logo.png" alt="logo" class="logo">
         <span class="text-align-center fs-1">ENJOY TRIP</span>
@@ -66,8 +66,6 @@ const isLogin = ref(false);
 </template>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Hi+Melody&display=swap');
-
 .logo {
   height: 40px;
 }
@@ -88,9 +86,5 @@ ul li a.router-link-exact-active {
   color: white;
   background-color: black;
   font-weight: bold;
-}
-
-#jmt-logo {
-  font-family: 'Hi Melody', cursive;
 }
 </style>
