@@ -9,7 +9,7 @@ import MainMiddle from './MainMiddle.vue';
             <img class="bg-img" src="@/assets/background.jpg" alt="back">
         </div>
         <MainData />
-        <MainMiddle/>
+        <MainMiddle />
     </div>
 </template>
 
