@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router';
 
 const router = useRouter();
 const memberStore = useMemberStore();
-const { userInfo } = memberStore;
+const { userInfo, isLogin } = memberStore;
 
 const props = defineProps({
     planList: Array
@@ -19,19 +19,24 @@ const planRequest = ref({
 });
 
 const onSubmit = () => {
-    planRequest.value.planDetailList = props.planList;
-    planRequest.value.memberId = userInfo.memberId;
-    console.log(JSON.stringify(planRequest.value));
-    writePlan(
-        planRequest.value,
-        () => {
-            alert("등록 성공!!");
-            router.push({ name: 'home' });
-        },
-        (err) => {
-            console.log(err);
-        }
-    )
+    if (!isLogin) {
+        alert("로그인이 필요한 기능입니다 !");
+        router.push({ name: 'login' });
+    } else {
+        planRequest.value.planDetailList = props.planList;
+        planRequest.value.memberId = userInfo.memberId;
+        console.log(JSON.stringify(planRequest.value));
+        writePlan(
+            planRequest.value,
+            () => {
+                alert("등록 성공!!");
+                router.push({ name: 'home' });
+            },
+            (err) => {
+                console.log(err);
+            }
+        );
+    }
 }
 </script>
 
