@@ -1,6 +1,10 @@
 <script setup>
-import { ref } from 'vue';
-const isLogin = ref(false);
+import { storeToRefs } from 'pinia';
+import { useMemberStore } from "../../stores/member";
+
+const memberStore = useMemberStore();
+const { isLogin } = storeToRefs(memberStore);
+const { userLogout } = memberStore;
 
 </script>
 
@@ -55,7 +59,7 @@ const isLogin = ref(false);
                 <router-link to="/info" class="nav-link">내 정보</router-link>
               </li>
               <li>
-                <button class="nav-link" @click="isLogin = !isLogin">로그 아웃</button>
+                <button class="nav-link" @click="userLogout()">로그 아웃</button>
               </li>
             </ul>
           </li>

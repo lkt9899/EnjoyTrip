@@ -1,8 +1,9 @@
 <script setup>
 import { ref } from 'vue';
-import { loginMember } from "@/api/member";
-import router from '@/router';
+import { useMemberStore } from "../stores/member";
 
+const memberStore = useMemberStore();
+const { userLogin } = memberStore;
 
 const form = ref({
   id: '',
@@ -15,22 +16,7 @@ const onSubmit = () => {
 };
 
 function callLoginMember() {
-  loginMember(
-    form.value,
-    (response) => {
-      let msg = "로그인에 실패했습니다.";
-      if (response.status == 200) msg = "로그인 성공.";
-      alert(msg);
-      moveMain();
-    },
-    (error) => {
-      console.log(error)
-    }
-  );
-}
-
-function moveMain() {
-  router.push({ name: "home" });
+  userLogin(form.value);
 }
 </script>
 
