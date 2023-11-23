@@ -6,6 +6,10 @@ import { PostList } from "@/api/board.js";
 // import VSelect from "@/components/common/VSelect.vue";
 import BoardListItem from "@/components/board/item/BoardListItem.vue";
 
+import { useMemberStore } from "../../stores/member";
+
+const memberStore = useMemberStore();
+const { userInfo, isLogin } = memberStore;
 
 const router = useRouter();
 
@@ -23,10 +27,10 @@ const hasPrev = ref(null);
 // const { VITE_ARTICLE_LIST_SIZE } = import.meta.env;
 
 const param = ref({
-    // firstItemId : 7
-    lastItemId : 0,
-//   key: "",
-//   word: "",
+  // firstItemId : 7
+  lastItemId: 0,
+  //   key: "",
+  //   word: "",
 });
 
 
@@ -39,21 +43,21 @@ onMounted(() => {
 });
 
 const getPostList = () => {
-    console.log("서버에서 글목록 얻어오자!!!", param.value);
-    PostList(
-        param.value,
-        ({ data }) => {
-            posts.value = data.list;
-            hasNext.value = data.hasNext;
-            hasPrev.value = data.hasPrev;
-        },
-        (error) => {
-            console.log(error);
-        }
-    )
+  console.log("서버에서 글목록 얻어오자!!!", param.value);
+  PostList(
+    param.value,
+    ({ data }) => {
+      posts.value = data.list;
+      hasNext.value = data.hasNext;
+      hasPrev.value = data.hasPrev;
+    },
+    (error) => {
+      console.log(error);
+    }
+  )
 };
 
-const goNextPage = () =>{
+const goNextPage = () => {
   console.log("서버에서 next 버튼 데이터 얻어오자!!!");
   const lastItem = posts.value[posts.value.length - 1];
   const lastItemId = lastItem ? lastItem.postId : 0;
@@ -63,7 +67,7 @@ const goNextPage = () =>{
   getPostList();
 }
 
-const goPrevPage = () =>{
+const goPrevPage = () => {
   console.log("서버에서 prev 버튼 데이터 얻어오자!!!");
   param.value.firstItemId = posts.value[0].postId;
   param.value.lastItemId = -1;
@@ -78,7 +82,12 @@ const goPrevPage = () =>{
 // };
 
 const moveWrite = () => {
-  router.push({ name: "board-write" });
+  if (!isLogin) {
+    alert("로그인이 필요한 페이지 입니다 !");
+    router.push({ name: "login" });
+  } else {
+    router.push({ name: "board-write" });
+  }
 };
 </script>
 
@@ -117,28 +126,17 @@ const moveWrite = () => {
             </tr>
           </thead>
           <tbody>
-            <BoardListItem
-              v-for="post in posts"
-              :key="post.postId"
-              :post="post"
-            ></BoardListItem>
+            <BoardListItem v-for="post in posts" :key="post.postId" :post="post"></BoardListItem>
           </tbody>
         </table>
       </div>
       <div class="row">
         <ul class="pagination justify-content-center">
           <li class="page-item">
-            <a class="page-link" 
-              @click="goPrevPage()"
-              :class="{ 'disabled': !hasPrev }"
-              :aria-disabled="!hasPrev"
-              >이전</a>
+            <a class="page-link" @click="goPrevPage()" :class="{ 'disabled': !hasPrev }" :aria-disabled="!hasPrev">이전</a>
           </li>
           <li class="page-item">
-            <a class="page-link" 
-              @click="goNextPage()"
-              :class="{'disabled' : !hasNext}"
-              :aria-disabled="!hasNext">다음</a>
+            <a class="page-link" @click="goNextPage()" :class="{ 'disabled': !hasNext }" :aria-disabled="!hasNext">다음</a>
           </li>
         </ul>
       </div>
