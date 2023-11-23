@@ -1,9 +1,11 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import { getList } from '@/api/attraction';
 
-const drawer = ref(false);
+const drawerCards = ref(false);
+const drawerPlan = ref(false);
 const attractions = ref([]);
+const plans = ref([]);
 const selectAttraction = ref({});
 
 const param = ref({
@@ -22,7 +24,7 @@ const param = ref({
 const setAttraction = (data) => {
     param.value = data;
     getAttractions();
-    drawer.value = !drawer.value;
+    drawerCards.value = true;
 }
 
 const getAttractions = () => {
@@ -37,32 +39,41 @@ const getAttractions = () => {
     );
 };
 
-const viewAttraction = (attraction) => {
-    selectAttraction.value = attraction;
+const viewAttraction = (item) => {
+    selectAttraction.value = item;
+};
+
+const addPlan = (item) => {
+    drawerPlan.value = true;
+    plans.value.push(item);
+    console.log(plans.value.length);
+}
+
+const removePlan = (idx) => {
+    plans.value.splice(idx, 1);
+    if (plans.value.length == 0)
+        drawerPlan.value = false;
 };
 </script>
 
 <template>
     <q-layout view="hHh LpR fff" container style="height: 730px" class="shadow-2 rounded-borders">
-        <q-drawer v-model="drawer" :width="200" :breakpoint="500" bordered
+        <q-drawer v-model="drawerCards" :width="300" :breakpoint="500" bordered
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
-            <q-scroll-area class="fit">
-                <q-list>
-                    <template v-for="attraction in attractions" :key="attraction.contentId">
-                        <q-item @click="viewAttraction(attraction)" clickable v-ripple>
-                            <q-card-component :item="attraction" :type="'at'" />
-                        </q-item>
-                    </template>
-                </q-list>
-            </q-scroll-area>
+            <q-side-list :items="attractions" :isPlan="false" @viewAttraction="viewAttraction" @addPlan="addPlan" />
         </q-drawer>
 
         <q-page-container>
-            <q-page padding>
+            <q-page class="p-2">
                 <search-location @updateAttraction="setAttraction" />
                 <v-kakao-map :attractions="attractions" :selectAttraction="selectAttraction" />
             </q-page>
         </q-page-container>
+
+        <q-drawer v-model="drawerPlan" :width="300" side="right" :breakpoint="500" bordered
+            :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
+            <q-side-list :items="plans" :isPlan="true" @removePlan="removePlan" />
+        </q-drawer>
     </q-layout>
 </template>
 

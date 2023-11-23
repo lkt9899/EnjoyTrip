@@ -94,7 +94,7 @@ const loadMarkers = () => {
         '        </div>' +
         '        <div class="body">' +
         '            <div class="img">' +
-        `                <img src="${position.img != '' ? position.img : '@/assets/noImage.jpg'}" width="73" height="70">` +
+        `                <img src="${position.img}" width="73" height="70">` +
         '           </div>' +
         '            <div class="desc">' +
         `                <div class="ellipsis">${position.addr}</div>` +

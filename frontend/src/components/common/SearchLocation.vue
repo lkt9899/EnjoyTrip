@@ -87,19 +87,19 @@ const onChangeContentType = (val) => {
 
 <template>
     <div class="d-flex flex-row mb-2 justify-content-start my-inputs">
-        <div class="d-flex col-2 mx-2">
+        <div class="d-flex col-2 me-2">
             <VSelect :selectOption="sidoList" @onKeySelect="onChangeSido" />
         </div>
-        <div class="d-flex col-2 mx-2">
+        <div class="d-flex col-2 me-2">
             <VSelect :selectOption="gugunList" @onKeySelect="onChangeGugun" />
         </div>
-        <div class="d-flex col-2 mx-2">
+        <div class="d-flex col-2 me-2">
             <VSelect :select-option="contentTypeList" @on-key-select="onChangeContentType" />
         </div>
-        <div class="d-flex col-2 mx-2">
+        <div class="d-flex col-2 me-2">
             <input v-model="param.searchCondition.keyword" type="text" placeholder="키워드 검색" class="w-100">
         </div>
-        <div class="col-2 mx-2">
+        <div class="col-2 me-2">
             <q-btn flat :icon="'search'" @click="$emit('updateAttraction', param)"></q-btn>
         </div>
     </div>
