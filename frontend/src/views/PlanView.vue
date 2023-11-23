@@ -54,7 +54,7 @@ const viewAttraction = (attraction) => {
                 <q-list>
                     <template v-for="attraction in attractions" :key="attraction.contentId">
                         <q-item @click="viewAttraction(attraction)" clickable v-ripple>
-                            <q-card-component :item="attraction" />
+                            <q-card-component :item="attraction" :type="'at'" />
                         </q-item>
                     </template>
                 </q-list>

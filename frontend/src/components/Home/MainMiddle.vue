@@ -2,9 +2,6 @@
 import { ref, onMounted, onUnmounted } from "vue";
 import { getList } from "@/api/attraction";
 
-import SearchBar from './SearchBar.vue';
-import QCardComponent from "../common/QCardComponent.vue";
-
 const items = ref([]);
 const scrollComponent = ref(null)
 const isInitCall = ref(true)
@@ -91,7 +88,8 @@ onUnmounted(() => {
       </div>
     </div>
     <div class="row" ref="scrollComponent">
-      <QCardComponent v-for="attraction in items" :key="attraction.contentId" :item="attraction" :alt-img="'images'" />
+      <q-card-component v-for="attraction in items" :key="attraction.contentId" :item="attraction" :type="'at'"
+        :alt-img="'images'" />
     </div>
   </div>
 </template>
