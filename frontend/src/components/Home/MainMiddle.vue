@@ -4,6 +4,7 @@ import { getList } from "@/api/attraction";
 
 import CardComponent from './CardComponent.vue';
 import SearchBar from './SearchBar.vue';
+import GeoLocation from './GeoLocation.vue';
 
 
 const items = ref([]);
@@ -90,6 +91,8 @@ onUnmounted(() => {
         <search-bar></search-bar>
       </div>
     </div>
+    <geo-location></geo-location>
+    
     <div class="row" ref="scrollComponent">
         <card-component 
         v-for="(item, index) in items"
