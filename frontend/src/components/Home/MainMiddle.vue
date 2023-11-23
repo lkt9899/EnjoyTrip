@@ -13,7 +13,8 @@ const requestParams = {
   searchCondition: {
     sidoCode: 1,
     gugunCode: 1,
-    contentTypeId: 12
+    contentTypeId: 12,
+    keyword: ""
   },
   pagingInfo: {
     lastItemId: 0,
