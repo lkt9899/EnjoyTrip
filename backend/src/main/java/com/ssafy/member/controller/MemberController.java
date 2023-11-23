@@ -34,6 +34,11 @@ public class MemberController {
         return ResponseEntity.status(HttpStatus.OK).body(res);
     }
 
+    @PostMapping("/idcheck")
+    public ResponseEntity<Boolean> idCheck (@RequestBody MemberLoginRequest req){
+        return ResponseEntity.status(HttpStatus.OK).body(memberService.idCheck(req.getId()));
+    }
+
     @PostMapping("/logout")
     public ResponseEntity<Void> logout(HttpSession session) {
         if (session.getAttribute("loginInfo") != null)

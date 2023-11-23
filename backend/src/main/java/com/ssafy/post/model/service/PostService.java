@@ -28,8 +28,9 @@ public class PostService {
     public PageResponseDto<PostResponse> getPostsPerPage(PageRequestDto pageRequestDto) {
 
         List<PostResponse> postList = mapper.getPostsPerPage(pageRequestDto);
-        int lastPostId = mapper.getLastPostId();
-        int firstPostId = mapper.getFirstPostId();
+        Integer lastPostId = mapper.getLastPostId();
+        Integer firstPostId = mapper.getFirstPostId();
+        if (lastPostId == null || firstPostId == null) return null;
 
         if (pageRequestDto.getLastItemId()!= -1){ //다음 페이지를 요청했다면
             return PageResponseDto.<PostResponse>builder()

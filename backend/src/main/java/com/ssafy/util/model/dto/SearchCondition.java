@@ -11,4 +11,5 @@ public class SearchCondition {
     private int sidoCode;
     private int gugunCode;
     private int contentTypeId;
+    private String keyword;
 }
