@@ -56,7 +56,8 @@ function moveMain() {
 </script>
 
 <template>
-  <BForm @submit="onSubmit" @reset="onReset" v-if="show" method = "post">
+  <div class="d-flex container" style="height: 1000px">
+    <BForm @submit="onSubmit" @reset="onReset" v-if="show" method = "post">
     <!--이름-->
     <BFormGroup
       id="input-group-1"
@@ -161,9 +162,14 @@ function moveMain() {
     <BButton type="submit" variant="primary">Submit</BButton>
     <BButton type="reset" variant="danger">Reset</BButton>
   </BForm>
+  </div>
+  
 </template>
   
 <style scoped>
+.d-flex{
+  justify-content: space-evenly;
+}
 
 </style>
 

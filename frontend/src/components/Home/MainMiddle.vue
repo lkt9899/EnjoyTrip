@@ -138,7 +138,7 @@ onUnmounted(() => {
  <div class="container">
     <div class="row">
       <div class="searchbar">
-        <search-bar></search-bar>
+        <!-- <search-bar></search-bar> -->
       </div>
     </div>
     <div class="row" ref="scrollComponent">
