@@ -1,39 +1,36 @@
 <script setup>
-import { ref } from 'vue';
-import { getList } from '@/api/attraction';
+import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+import { getList } from '@/api/plan';
+import { useMemberStore } from "../stores/member";
 
 import VKakaoMap from "@/components/common/VKakaoMap.vue";
 
-const drawer = ref(false);
+const router = useRouter();
 
+const memberStore = useMemberStore();
+const { isLogin, userInfo } = memberStore;
+
+const drawer = ref(true);
+
+const plans = ref([]);
 const attractions = ref([]);
 const selectAttraction = ref({});
 
-const param = ref({
-    searchCondition: {
-        "sidoCode": "",
-        "gugunCode": "",
-        "contentTypeId": "",
-        "keyword": ""
-    },
-
-    pagingInfo: {
-        "lastItemId": 0,
-        "count": 30
+onMounted(() => {
+    if (!isLogin) {
+        alert("로그인이 필요한 페이지 입니다 !");
+        router.push({ name: "login" });
+    } else {
+        getPlanList();
     }
 });
 
-const setAttraction = (data) => {
-    param.value = data;
-    getAttractions();
-    drawer.value = true;
-}
-
-const getAttractions = () => {
+const getPlanList = () => {
     getList(
-        param.value,
+        userInfo.memberId,
         ({ data }) => {
-            attractions.value = data;
+            plans.value = data;
         },
         (err) => {
             console.log(err);
@@ -41,29 +38,25 @@ const getAttractions = () => {
     );
 };
 
-const viewAttraction = (attraction) => {
-    selectAttraction.value = attraction;
+const viewAttraction = (data) => {
+    selectAttraction.value = data;
 };
+
+const setAttractions = (data) => {
+    attractions.value = data;
+}
+
 </script>
 
 <template>
     <q-layout view="hHh Lpr lff" container style="height: 730px" class="shadow-2 rounded-borders">
-        <q-drawer v-model="drawer" :width="200" :breakpoint="500" bordered
+        <q-drawer v-model="drawer" :width="350" :breakpoint="500" bordered
             :class="$q.dark.isActive ? 'bg-grey-9' : 'bg-grey-3'">
-            <q-scroll-area class="fit">
-                <q-list>
-                    <template v-for="attraction in attractions" :key="attraction.contentId">
-                        <q-item @click="viewAttraction(attraction)" clickable v-ripple>
-                            <q-card-component :item="attraction" :type="'at'" />
-                        </q-item>
-                    </template>
-                </q-list>
-            </q-scroll-area>
+            <plan-item-list :items="plans" @selectAttraction="viewAttraction" @setAttractions="setAttractions" />
         </q-drawer>
 
         <q-page-container>
             <q-page padding>
-                <search-location @updateAttraction="setAttraction" />
                 <VKakaoMap :attractions="attractions" :selectAttraction="selectAttraction" />
             </q-page>
         </q-page-container>

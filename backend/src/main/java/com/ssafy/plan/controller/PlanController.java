@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/plan")
@@ -36,5 +38,12 @@ public class PlanController {
     public ResponseEntity<Void> delete(@PathVariable int planId) {
         planService.delete(planId);
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @GetMapping("/list/{memberId}")
+    public ResponseEntity<List<PlanDtoResponse>> list(@PathVariable int memberId) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(planService.getPlanList(memberId));
     }
 }

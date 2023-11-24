@@ -43,6 +43,36 @@
 	</insert>
 
 	<!-- 계획 보기 -->
+	<select id="getPlanList" parameterType="int" resultMap="planResponse">
+		SELECT
+			ct.plan_id planId,
+			ct.member_id memberId,
+			ct.title c_title,
+			at.content_id contentId,
+			at.content_type_id contentTypeId,
+			at.title,
+			at.addr1,
+			at.tel,
+			at.first_image firstImage,
+			at.sido_code sidoCode,
+			at.gugun_code gugunCode,
+			at.latitude,
+			at.longitude
+		FROM (
+				 SELECT
+					 p.plan_id,
+					 p.member_id,
+					 p.title,
+					 pd.plan_detail_id,
+					 pd.content_id
+				 FROM
+					 plan p INNER JOIN plan_detail pd
+				   	 ON p.plan_id = pd.plan_id
+				 WHERE p.member_id = #{memberId}
+				 ) ct INNER JOIN attraction_info at
+				 ON ct.content_id = at.content_id;
+	</select>
+
 	<select id="findPlanById" resultMap="planResponse">
 		SELECT
 			ct.plan_id planId,
@@ -93,11 +123,5 @@
 	<delete id="deleteDetails" parameterType="int">
 		DELETE FROM plan_detail
 		WHERE plan_id = #{planId};
-	</delete>
-	
-	<!-- 여행 계획 삭제 -->
-	<delete id="delete" parameterType="int">
-		DELETE FROM plan
-		WHERE plan_id = #{planId}
 	</delete>
 </mapper>

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
 @Service
@@ -47,5 +49,9 @@ public class PlanService {
             throw new PlanException(PlanErrorCode.NOT_EXIST_PLAN);
 
         return mapper.findPlanById(planId);
+    }
+
+    public List<PlanDtoResponse> getPlanList(int memberId) {
+        return mapper.getPlanList(memberId);
     }
 }
