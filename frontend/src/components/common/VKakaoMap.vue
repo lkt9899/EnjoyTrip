@@ -46,7 +46,6 @@ watch(
 
       positions.value.push(obj);
     });
-    console.log(positions);
     loadMarkers();
   },
   { deep: true }
@@ -77,7 +76,6 @@ const loadMarkers = () => {
   // 마커를 생성합니다
   markers.value = [];
   positions.value.forEach((position) => {
-    // console.log(position);
     const marker = new kakao.maps.Marker({
       map: map, // 마커를 표시할 지도
       position: position.latlng, // 마커를 표시할 위치

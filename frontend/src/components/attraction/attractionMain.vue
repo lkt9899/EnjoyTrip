@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref } from "vue";
 import { getList } from '@/api/attraction';
 
 const drawerCards = ref(false);
