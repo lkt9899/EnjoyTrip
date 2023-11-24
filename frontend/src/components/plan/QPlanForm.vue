@@ -30,7 +30,7 @@ const onSubmit = () => {
             planRequest.value,
             () => {
                 alert("등록 성공!!");
-                router.push({ name: 'home' });
+                router.push({ name: 'plan' });
             },
             (err) => {
                 console.log(err);
