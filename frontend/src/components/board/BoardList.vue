@@ -9,7 +9,7 @@ import BoardListItem from "@/components/board/item/BoardListItem.vue";
 import { useMemberStore } from "../../stores/member";
 
 const memberStore = useMemberStore();
-const { userInfo, isLogin } = memberStore;
+const { isLogin } = memberStore;
 
 const router = useRouter();
 
@@ -21,16 +21,14 @@ const router = useRouter();
 // ]);
 
 const posts = ref([]);
-const hasNext = ref(null);
-const hasPrev = ref(null);
+const hasNext = ref(true);
+const hasPrev = ref(false);
 
 // const { VITE_ARTICLE_LIST_SIZE } = import.meta.env;
 
 const param = ref({
-  // firstItemId : 7
-  lastItemId: 0,
-  //   key: "",
-  //   word: "",
+  firstItemId: -1,
+  lastItemId: -1,
 });
 
 
