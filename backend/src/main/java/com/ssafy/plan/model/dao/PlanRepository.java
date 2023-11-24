@@ -4,6 +4,8 @@ import com.ssafy.plan.model.dto.Plan;
 import com.ssafy.plan.model.dto.response.PlanDtoResponse;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface PlanRepository {
     void insert(Plan plan);
@@ -13,5 +15,6 @@ public interface PlanRepository {
     void deleteDetails(Plan plan);
     void updateName(Plan plan);
     PlanDtoResponse findPlanById(int planId);
+    List<PlanDtoResponse> getPlanList(int memberId);
 
 }
