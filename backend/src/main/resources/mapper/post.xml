@@ -58,15 +58,16 @@
 		<choose>
 			<when test="firstItemId != -1">
 				<![CDATA[
-				WHERE post_id < #{firstItemId}
+				WHERE post_id > #{firstItemId}
 			   	]]>
 			</when>
 			<when test="lastItemId != -1">
 				<![CDATA[
-				WHERE post_id > #{lastItemId}
+				WHERE post_id < #{lastItemId}
 			   	]]>
 			</when>
 		</choose>
+		ORDER BY p.post_id DESC
 		LIMIT #{count}
 	</select>
 
@@ -74,9 +75,6 @@
 	<select id="getTotalPostCount" parameterType="map" resultType="int">
 		select count(post_id)
 		from post
-<!--		<where>-->
-<!--			<include refid="search"></include>-->
-<!--		</where>-->
 	</select>
 
 	<!-- 게시글 첫 postId 조회 -->

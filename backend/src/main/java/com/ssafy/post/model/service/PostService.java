@@ -26,32 +26,32 @@ public class PostService {
     }
 
     public PageResponseDto<PostResponse> getPostsPerPage(PageRequestDto pageRequestDto) {
+        List<PostResponse> list = mapper.getPostsPerPage(pageRequestDto);
+        boolean hasNext = true;
+        boolean hasPrev = false;
 
-        List<PostResponse> postList = mapper.getPostsPerPage(pageRequestDto);
-        Integer lastPostId = mapper.getLastPostId();
-        Integer firstPostId = mapper.getFirstPostId();
-        if (lastPostId == null || firstPostId == null) return null;
+        Integer lastPostId = mapper.getFirstPostId();
+        Integer firstPostId = mapper.getLastPostId();
 
-        if (pageRequestDto.getLastItemId()!= -1){ //다음 페이지를 요청했다면
-            return PageResponseDto.<PostResponse>builder()
-                    .list(postList)
-                    .hasPrev(firstPostId >= pageRequestDto.getLastItemId()?false: true)
-                    .hasNext( (postList.get(postList.size()-1).getPostId() == lastPostId)? false: true)
-                    .build();
+        if (pageRequestDto.getLastItemId() != -1){
+            hasNext = list.get(list.size() - 1).getPostId() != lastPostId;
+            hasPrev = true;
         }
-        if(pageRequestDto.getFirstItemId()!= -1){ //이전 페이지를 요청했다면
-            return PageResponseDto.<PostResponse>builder()
-                    .list(postList)
-                    .hasPrev( (postList.get(0).getPostId() == firstPostId) ? false : true )
-                    .hasNext(true)
-                    .build();
+
+        if(pageRequestDto.getFirstItemId() != -1){
+            hasPrev = list.get(0).getPostId() != firstPostId;
+            hasNext = true;
         }
-        return null;
+
+        return PageResponseDto.<PostResponse>builder()
+                .list(list)
+                .hasNext(hasNext)
+                .hasPrev(hasPrev)
+                .build();
     }
 
     @Transactional
     public Post select(int postId) {
-        System.out.println("PostService postId : "+postId);
         if(mapper.existById(postId) == 0)
             throw new PostException(PostErrorCode.NOT_EXIST_POST);
 
@@ -61,7 +61,6 @@ public class PostService {
 
     @Transactional
     public void update(Post post) {
-        System.out.println("PostService postId : "+post);
         if(mapper.existById(post.getPostId()) == 0)
             throw new PostException(PostErrorCode.NOT_EXIST_POST);
 
